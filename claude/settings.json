@@ -201,9 +201,9 @@
     "azure@claude-plugins-official": true,
     "ponytail@ponytail": true,
     "mattpocock-skills@claude-plugins-official": true,
-    "andrej-karpathy-skills@karpathy-skills": true,
     "hindsight-memory@hindsight": true,
-    "last30days@last30days-skill": true
+    "last30days@last30days-skill": true,
+    "andrej-karpathy-skills@karpathy-skills": false
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {

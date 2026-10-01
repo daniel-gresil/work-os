@@ -1,7 +1,7 @@
 ---
 name: wrap-up
-description: End-of-session checklist for Claude Code. Use when the user says they're wrapping up, ending the session, finishing for the day, or asks to "wrap up", "finalize", "close out", or "summarize" a working session. Surfaces git state, proposes commits without making them, routes session learnings (architecture decisions, environment/infra facts, repeatable procedures) to the right docs and to Hindsight team memory, writes a handoff note for the next session, and recommends (but does not execute) merge-to-main.
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git remote:*), Bash(hindsight memory recall:*), Bash(hindsight memory retain:*), Read, Write, Edit, Glob, Grep
+description: End-of-session checklist for Claude Code. Use when the user says they're wrapping up, ending the session, finishing for the day, or asks to "wrap up", "finalize", "close out", or "summarize" a working session. Surfaces git state, proposes commits without making them, routes session learnings to the right docs and to Hindsight, writes a handoff note, recommends (but does not execute) merge-to-main, then runs the reflection: what Dan corrected, what repeated, what preferences he showed, the task log, skill usage, and pending email drafts. In a non-code session it runs only the reflection.
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git remote:*), Bash(hindsight:*), Read, Write, Edit, Glob, Grep
 ---
 
 # Wrap-up: end-of-session checklist
@@ -25,6 +25,20 @@ when this session ends.
 4. **Keep additions to docs short.** Bloated CLAUDE.md and bloated docs get
    skimmed past. If you're tempted to write more than ~10 lines into any
    single doc, consider whether it belongs in its own file instead.
+
+5. **Nothing Claude-related goes into a client repo.** No attribution or
+   co-author lines in any proposed commit or PR. Never propose committing
+   `CLAUDE.md` or anything under `.claude/` in a client repo; those live in
+   `~/Developer/GitHub/work-os/clients/<client>/<repo>/`.
+6. **Nothing is written until Dan approves it.** Every memory, skill edit,
+   Hindsight `retain`, log line and style lesson is proposed first.
+
+## Step 0 — Which kind of session was this?
+
+- **Code session** (started in a client repo, code changed): run every step.
+- **Non-code session** (started in `work-os`: email, admin, tickets, research,
+  design): skip Steps 1, 2, 4 and 5. `work-os` commits and pushes itself
+  through its sync hook. Run Steps 3, 3b and 6.
 
 ## Step 1 — Surface the actual git state
 
@@ -71,9 +85,10 @@ Then for everything uncommitted that should be saved:
 **Then stop and wait.** Do not run `git add` or `git commit` until the user
 approves. If they approve some but not others, only act on the approved ones.
 
-If the user has a Claude Code attribution preference (check CLAUDE.md or just
-ask if it's not stated), respect it — some users want the `Co-authored-by:
-Claude` trailer, some don't.
+Proposed commit messages never mention Claude. Before proposing, run
+`git config user.email` and show it: `Lave-Apparel` repos must show
+`daniel.souza@laveapparel.com`, everything else `daniel@gresil.com`. If it is
+wrong, stop and say so.
 
 ## Step 3 — Capture session learnings, routed to the right file
 
@@ -86,12 +101,12 @@ into CLAUDE.md, and do NOT dump everything into Hindsight:
 
 | Type of learning                                                                | Goes in                                          |
 |---------------------------------------------------------------------------------|--------------------------------------------------|
-| Project-wide conventions, "how we work here"                                    | `CLAUDE.md`                                      |
+| Project-wide conventions, "how we work here"                                    | The repo's `CLAUDE.md`, which for a client repo is `work-os/clients/<client>/<repo>/CLAUDE.md` |
 | Domain knowledge, data model, business rules                                    | repo markdown docs (`docs/`, `README.md`, etc.)  |
 | Architectural decisions with tradeoffs                                          | `docs/adr/NNNN-title.md` (create dir if needed)  |
-| Reusable workflows we'd invoke again                                            | `.claude/skills/<name>/SKILL.md`                 |
+| Reusable workflows we'd invoke again                                            | `work-os/claude/skills/<name>/SKILL.md` (see Step 3b for when) |
 | Gotchas, bugs, and their fixes                                                  | `TROUBLESHOOTING.md` or inline code comments     |
-| Coding rules that should be enforced                                            | `.claude/rules/` or CLAUDE.md "Rules" section    |
+| Coding rules that should be enforced                                            | The repo's `CLAUDE.md` "Rules" section (in `work-os` for client repos) |
 | Cross-repo technical knowledge: infra runbooks, command recipes, debugging notes, architecture lessons — anything an agent in **any** Lave code repo would want to recall | Hindsight bank `lave-tech` (via the `hindsight-self-hosted` skill) |
 | Business / operational knowledge: company processes, vendor relationships, finance/legal workflows, product/brand decisions, team norms — anything not tied to a code repo | Hindsight bank `lave-business` (via the `hindsight-self-hosted` skill) |
 
@@ -117,11 +132,66 @@ For each learning, propose:
 If there are no real learnings — sometimes a session is just routine
 implementation — say so and skip this step. Don't manufacture content.
 
+## Step 3b — Reflection: learn how Dan works
+
+All paths are under `~/Developer/GitHub/work-os/`. Present one short list of
+proposals covering the six parts below, then wait. Write only what Dan
+approves. Skip any part with nothing real to report.
+
+**1. Corrections and preferences.** Go back through the session for every
+place Dan corrected you, rejected an approach, or stated how he wants
+something done. For each, propose where it goes:
+
+| What it is | Goes in |
+|---|---|
+| Applies to every session, must never be missed | `claude/CLAUDE.md` |
+| Applies to one skill | that skill's `SKILL.md` |
+| How Dan likes to work, in this project | the project's memory folder (`memory/`, or `clients/<client>/<repo>/memory/`) |
+| A fact about Lave (system, person, vendor, incident, reason) | Hindsight `lave-tech` or `lave-business` |
+
+A one-off edit is not a preference. Say when you are unsure whether something
+is a pattern, and let Dan decide.
+
+**2. Task log.** Read `task-log.md`. Show Dan the existing task types and
+propose either a match or a new type for this session's task. After he
+confirms, append one line:
+
+```
+YYYY-MM-DD | <client> | <task type> | <a few words on what was done>
+```
+
+No email content, names of external people, or client data in this file.
+
+**3. Third occurrence.** If that task type now appears three or more times and
+has no skill, say so and offer to draft one from those sessions' notes,
+starting at L0 or L1. If Dan says "not yet", ask again at the next occurrence.
+
+**4. Skill usage.** For each `work-os` skill used this session, append a line
+to `skill-usage.md`:
+
+```
+YYYY-MM-DD | <skill> | <level> | clean   (or: corrected — <what Dan changed>)
+```
+
+If a skill's last five lines are all `clean` and you have not asked since that
+streak began, ask whether to raise its level, and list what would have to
+change in the skill to do so. Never raise a level yourself. Never propose a
+level above L2 for a skill that sends or deletes.
+
+**5. Pending email drafts.** If `.state/pending-drafts/` holds drafts, run the
+`draft-email-reply` skill's comparison step: find the ones Dan has since
+sent, compare each with what he sent, and propose style lessons for
+`clients/lave/email-style.md`. Drop drafts older than 14 days.
+
+**6. Glossary.** If a term was settled or changed this session, propose the
+edit to `CONTEXT.md`.
+
 ## Step 4 — Write a handoff note
 
-Create or update `.claude/HANDOFF.md`. If it doesn't exist, create it. If it
-exists, prepend a new dated section at the top (newest first) so the file
-stays useful over time.
+Create or update the repo's handoff file. For a client repo this is
+`~/Developer/GitHub/work-os/clients/<client>/<repo>/HANDOFF.md`, so it reaches
+both Macs and never touches the client repo. If it exists, prepend a new dated
+section at the top (newest first) so the file stays useful over time.
 
 Use this template:
 
@@ -157,8 +227,8 @@ Be concrete. "Refactored the data loader" is useless; "Refactored
 `ingest/loader.py` to use Polars instead of pandas; benchmarks pending in
 `tests/bench_loader.py`" is useful.
 
-This file should be committed (it's a note for the team and future-you), so
-include it in commit proposals if it's new or changed.
+Do not include this file in commit proposals. It lives in `work-os`, which
+syncs on its own.
 
 ## Step 5 — Decide on merge-to-main
 
@@ -208,8 +278,9 @@ Keep this terse. No prose, just the five lines.
 
 ## When to skip steps
 
-- Clean working tree, nothing ahead of upstream → skip 1, 2, 5; just do 3,
-  4, 6 if there are learnings worth capturing.
-- Pure exploration session with no code changes → just do 4 and 6.
+- Non-code session → Steps 3, 3b and 6 only (see Step 0).
+- Clean working tree, nothing ahead of upstream → skip 1, 2, 5.
+- Pure exploration session with no code changes → 3b, 4 and 6.
+- Step 3b is never skipped entirely: the task log line is always proposed.
 - User says "just commit and wrap up" → still propose first, but be brief
   about it.

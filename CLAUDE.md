@@ -24,3 +24,7 @@ bash -n setup.sh claude/hooks/*.sh          # syntax
 claude/hooks/work-os-sync.sh start          # run the sync by hand; silent means clean
 git -C <any Lave repo> config user.email    # must print daniel.souza@laveapparel.com
 ```
+
+## Client context
+
+@clients/lave/CLAUDE.md

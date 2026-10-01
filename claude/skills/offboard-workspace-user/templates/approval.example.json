@@ -1,0 +1,6 @@
+{
+  "decision": "approve",
+  "approved_by": "change-ticket-or-human-id",
+  "plan_digest": "copy-exact-plan_digest",
+  "confirmation": "copy-exact-required_confirmation"
+}

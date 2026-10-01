@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "operation": "remove",
+  "target": {
+    "email": "departing.user@example.test"
+  },
+  "platforms": {
+    "google_workspace": {
+      "disposition": "present",
+      "immutable_id": "g-123",
+      "customer_id": "C-example",
+      "license_product_ids": [
+        "Google-Apps", "101068", "101047", "101034", "101031", "101037",
+        "101038", "101054", "Google-Vault", "101001", "101005", "101052",
+        "101050", "101049", "101036", "101043", "101033", "101039", "101040",
+        "101035"
+      ],
+      "license_product_catalog_complete": true,
+      "expected_licenses": [
+        {
+          "product_id": "Google-Apps",
+          "sku_id": "sku-example"
+        }
+      ]
+    },
+    "microsoft_365": {
+      "disposition": "absent",
+      "tenant_id": "tenant-example"
+    }
+  },
+  "policy": {
+    "mail": "delete",
+    "files": "delete",
+    "transfer_destination": null,
+    "legal_hold": "none_known",
+    "license": "release_on_delete",
+    "deletion": "immediate",
+    "approver": "change-ticket-or-human-id",
+    "accepted_unknowns": []
+  }
+}

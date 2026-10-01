@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "record_type": "workspace_user_lifecycle_inventory",
+  "mode": "inventory",
+  "providers": {
+    "google_workspace": {
+      "status": "ok",
+      "complete": true,
+      "customer_id": "C-example",
+      "identity": {
+        "exact_matches": [
+          {
+            "email": "departing.user@example.test",
+            "immutable_id": "g-123"
+          }
+        ],
+        "non_user_matches": []
+      },
+      "groups": [],
+      "roles": [],
+      "licenses": [
+        {
+          "product_id": "Google-Apps",
+          "sku_id": "sku-example",
+          "user_id": "departing.user@example.test"
+        }
+      ],
+      "drive": {"owned_nontrashed_count": 0},
+      "mailbox": {"exists": true},
+      "errors": [],
+      "write_count": 0
+    },
+    "microsoft_365": {
+      "status": "ok",
+      "complete": true,
+      "tenant_id": "tenant-example",
+      "identity": {"exact_matches": [], "non_user_matches": []},
+      "deleted_exact_matches": [],
+      "protected_same_localpart": [
+        {
+          "immutable_id": "protected-1",
+          "canonical_upn": "departing.user@other.test"
+        }
+      ],
+      "errors": [],
+      "write_count": 0
+    }
+  },
+  "write_count": 0,
+  "tenant_writes_performed": false
+}
