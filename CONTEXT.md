@@ -1,4 +1,4 @@
-# Context (other mac)
+# Context
 
 Glossary for Dan's work OS. Definitions only.
 
@@ -33,4 +33,3 @@ Glossary for Dan's work OS. Definitions only.
 
 **Batch work** — the same action over many items. Claude writes and tests a script that loops; Claude is never the loop.
 
-<!-- local -->
