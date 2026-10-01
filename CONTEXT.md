@@ -32,3 +32,4 @@ Glossary for Dan's work OS. Definitions only.
 **Hard rule** — nothing Claude-related (files, attribution, co-author lines) is ever committed to a client repo, and each commit carries the identity that belongs to the repo's owner.
 
 **Batch work** — the same action over many items. Claude writes and tests a script that loops; Claude is never the loop.
+
