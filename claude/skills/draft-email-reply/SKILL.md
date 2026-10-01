@@ -70,7 +70,7 @@ $RUN --script $READ sent --thread-id <thread_id from meta.json> --after-ms <crea
   --images-dir /abs/scratchpad/sent-images
 ```
 
-- **A sent message is returned:** compare its `text` with `body.txt`. Note what Dan changed: wording, length, greeting and sign-off, structure, an added table (`has_table`), added screenshots (`inline_images`; open the saved files to see what he chose to show). Then delete the folder.
+- **A sent message is returned:** compare its `text` with `body.txt`. Ignore pure formatting differences: Gmail's plain text shows bold as `*text*` and uses `\r\n` line endings. Note what Dan changed: wording, length, greeting and sign-off, structure, an added table (`has_table`), added screenshots (`inline_images`; open the saved files to see what he chose to show). Then delete the folder.
 - **Nothing returned and the folder is under 14 days old:** leave it.
 - **Nothing returned and it is older than 14 days:** delete it; Dan did not send it.
 
