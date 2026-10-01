@@ -5,3 +5,4 @@
 - [Find columns by content](find-columns-by-content.md) — search the data for known values before saying a column is missing
 - [Approve means proceed](approve-means-proceed.md) — do the clear-cut parts, bring back only real decisions, prefer recoverable actions
 - [Fresh email drops helpdesk](fresh-email-drop-helpdesk.md) — new thread from a ticket: leave helpdesk@ off, copy direct addresses
+- [Skip copy tabs](skip-copy-tabs.md) — leave "Copy of…" and personal copy tabs out when listing tabs that need work

@@ -14,3 +14,5 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-01 | draft-email-reply | L1 | corrected — Dan asked to add the task link to the draft
 2026-10-01 | gmail-draft | L1 | clean
 2026-10-01 | gmail-draft | L1 | clean
+2026-10-01 | assign-column-ids | none stated | clean
+2026-10-01 | ado-add-task | L2 | corrected — Dan narrowed the card to two tabs, dropping the copy tabs

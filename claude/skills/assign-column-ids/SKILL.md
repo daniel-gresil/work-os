@@ -5,6 +5,9 @@ description: Assign Lave column IDs — claim free rows in the central column re
 
 # Assign column IDs
 
+**Level: L2.** Dan naming the tab and the columns that need IDs is the approval;
+anything beyond that list (other tabs, re-stamping an existing ID) needs his yes first.
+
 Every Lave sheet tab carries a numeric column ID in row 1 (human header on the
 next row). IDs come from the **central column registry** ("9085"):
 `1KM8vJCuAIGoWP5nmIBnnXZPcsz4Qzn459aIyk1V4eCY`, tab `1) Column Headers`,
@@ -38,6 +41,11 @@ OAuth via the cached creds in `lave-file-access-audit/.cf_creds.json`, or `op`).
    python3 assign_column_ids.py find --dept <Department> -n <count>
    python3 assign_column_ids.py find --vintage -n <count>     # VI files
    ```
+   `find --vintage` lists the lowest free Vintage-marked rows first (6009+), not
+   the 7272–7500 block; pick from 7272–7500 by hand. A free registry row can
+   already be stamped on a sheet (6228 was): check each candidate ID against
+   row 1 of every tab in the target file before claiming.
+
    Before claiming, grep the registry for an existing row with the same header
    in the same department/file; if one exists, tell the user and offer to
    reuse it instead of claiming a new ID.
@@ -48,7 +56,7 @@ OAuth via the cached creds in `lave-file-access-audit/.cf_creds.json`, or `op`).
    python3 assign_column_ids.py claim --id 7272 --h1 "TxnDate" --h3 "Invoice VI" \
      --dept Finance --file 7002 --notes "Invoice date sent to QBO as TxnDate"
    ```
-   `--file` is the Lave file number (9025 and 7002 are known; otherwise pass `--url`).
+   `--file` is the Lave file number (9025, 7001 and 7002 are known; otherwise pass `--url`).
    `--notes` is a one-line description of what the column is used for.
 
 4. **Stamp the IDs into row 1** of the target tab. Checks each ID is claimed,
