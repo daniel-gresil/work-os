@@ -1,4 +1,4 @@
-# Context
+# Context (other mac)
 
 Glossary for Dan's work OS. Definitions only.
 
