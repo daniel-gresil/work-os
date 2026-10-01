@@ -13,6 +13,7 @@
 **Open questions / blockers:**
 - The draft body was not read back; Dan reviews and sends it.
 - Dashboard masthead not checked after the apply.
+- Local main was one PR behind (#14, which rewrote the sprint-planning skill), so this sprint ran on the old skill: no plan hash, no built-in read-back, draft made by the old newsletter.py. A manual read-back showed 22 cards in Sprint 6, all dated. Fetch main before the next sprint planning.
 
 **Key decisions and why:**
 - Start date 2026-09-24, not today — keeps sprints contiguous with Sprint 5 (ended 2026-09-23); about half the cards carry past dates as a result.
