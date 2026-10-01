@@ -33,6 +33,8 @@ A card built from a customer request is created only after Daniel approves the d
    card and into a message Daniel sends himself.
    Before creating, list what is still open. Any decision that changes the requester's file or
    process is a point to confirm with them, even when Daniel has decided it; offer the message.
+   Ask Daniel whether each such point is already confirmed before listing it for the requester;
+   when he confirms it, state it as a rule on the card and drop the message.
 
 ## Check for an existing card (when Daniel asks)
 

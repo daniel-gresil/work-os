@@ -17,3 +17,4 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-01 | assign-column-ids | none stated | clean
 2026-10-01 | ado-add-task | L2 | corrected — Dan narrowed the card to two tabs, dropping the copy tabs
 2026-10-01 | ado-add-task | L2 | corrected — Dan stopped questions beyond the request's scope and removed a section from the created card
+2026-10-01 | ado-add-task | L2 | clean
