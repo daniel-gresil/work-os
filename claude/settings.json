@@ -8,7 +8,6 @@
     "sessionUrl": false
   },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(npm --version)",
       "Bash(git --version)",
@@ -22,7 +21,8 @@
       "WebFetch(domain:github.com)",
       "Bash(git commit *)",
       "Bash(git push *)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "fable[1m]",
   "hooks": {
