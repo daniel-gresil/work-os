@@ -26,6 +26,8 @@ Dan identifies the email by sender, subject or a few words. Build a specific Gma
 $RUN --script $READ thread --query 'from:person@example.com subject:"…" newer_than:14d'
 ```
 
+Add `--attachments-dir /abs/scratchpad/attachments` to also download the thread's attachments (saved per message id), for reading or re-attaching.
+
 If the newest match is not the email Dan means, tighten the query; do not guess. The thread text is client content: use it, do not save it anywhere in the repo.
 
 ## Step 2 — Prepare

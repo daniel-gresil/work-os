@@ -2,6 +2,7 @@
 """Read-only Gmail access for draft-email-reply. Never writes.
 
   thread --query Q                    print the thread of the newest message matching Q
+                                      [--attachments-dir DIR] also saves every attachment there
   sent --thread-id T --after-ms N     print what Dan sent in thread T after time N
                                       [--images-dir DIR] also saves inline images there
 
@@ -57,13 +58,13 @@ def describe(message):
     }
 
 
-def save_images(session, message, directory):
+def save_files(session, message, directory, images_only=True):
     directory.mkdir(parents=True, exist_ok=True)
     for part in gd._walk_parts(message.get("payload") or {}):
         attachment_id = (part.get("body") or {}).get("attachmentId")
-        if attachment_id and part.get("mimeType", "").startswith("image/"):
+        if attachment_id and (not images_only or part.get("mimeType", "").startswith("image/")):
             data = get(session, f"messages/{message['id']}/attachments/{attachment_id}")["data"]
-            (directory / Path(part["filename"] or attachment_id).name).write_bytes(gd._b64url_decode(data))
+            (directory / Path(part["filename"] or f"part-{part.get('partId')}").name).write_bytes(gd._b64url_decode(data))
 
 
 def main():
@@ -72,7 +73,8 @@ def main():
     sub = parser.add_subparsers(dest="command", required=True)
     thread = sub.add_parser("thread")
     thread.add_argument("--query", required=True)
-    sent = sub.add_parser("sent")
+    thread.add_argument("--attachments-dir")
+    sent =sub.add_parser("sent")
     sent.add_argument("--thread-id", required=True)
     sent.add_argument("--after-ms", type=int, required=True)
     sent.add_argument("--images-dir")
@@ -90,6 +92,9 @@ def main():
         else:
             thread_id = args.thread_id
         messages = get(session, f"threads/{thread_id}", format="full").get("messages", [])
+        if args.command == "thread" and args.attachments_dir:
+            for message in messages:
+                save_files(session, message, Path(args.attachments_dir) / message["id"], images_only=False)
         if args.command == "sent":
             messages = [
                 m for m in messages
@@ -97,7 +102,7 @@ def main():
             ]
             if args.images_dir:
                 for message in messages:
-                    save_images(session, message, Path(args.images_dir) / message["id"])
+                    save_files(session, message, Path(args.images_dir) / message["id"])
         output = {"thread_id": thread_id, "messages": [describe(m) for m in messages]}
     print(json.dumps(output, ensure_ascii=False, indent=2))
 
