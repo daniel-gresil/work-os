@@ -81,7 +81,7 @@ while IFS= read -r raw || [ -n "$raw" ]; do
     OP_ARGS=()
     [ -n "$ACCOUNT" ] && OP_ARGS+=("--account" "$ACCOUNT")
 
-    if VALUE=$(op read "${OP_ARGS[@]}" "$OP_REF" 2>/dev/null); then
+    if VALUE=$(op read "${OP_ARGS[@]}" "$OP_REF" 2>"$CACHE_DIR/.op-error"); then
       if [ -n "$IS_FILE" ]; then
         FILE_PATH="$CACHE_DIR/files/$ENV_NAME"
         # Append a trailing newline — OpenSSH private keys (and most text-format
@@ -96,7 +96,7 @@ while IFS= read -r raw || [ -n "$raw" ]; do
       COUNT=$((COUNT + 1))
       echo "  loaded $ENV_NAME${IS_FILE:+ (file)}" >&2
     else
-      echo "  FAILED $OP_REF (skipped)" >&2
+      echo "  FAILED $OP_REF (skipped): $(head -1 "$CACHE_DIR/.op-error" 2>/dev/null)" >&2
       FAIL=$((FAIL + 1))
     fi
   else
