@@ -34,6 +34,7 @@ link "$REPO/claude/hooks/op-secrets-load.sh" "$HOME/.claude/op-secrets-load.sh"
 for d in "$REPO"/claude/skills/*/; do d="${d%/}"; link "$d" "$HOME/.claude/skills/$(basename "$d")"; done
 for f in "$REPO"/claude/agents/*.md; do link "$f" "$HOME/.claude/agents/$(basename "$f")"; done
 for f in "$REPO"/claude/hooks/*; do link "$f" "$HOME/.claude/hooks/$(basename "$f")"; done
+for f in "$REPO"/claude/docs/agents/*.md; do link "$f" "$HOME/.claude/docs/agents/$(basename "$f")"; done
 
 # Global git rules: ignore file, per-org identity and login (see git/config).
 git config --global --get-all include.path | grep -qxF "$REPO/git/config" \
