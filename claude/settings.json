@@ -12,15 +12,10 @@
       "Bash(npm --version)",
       "Bash(git --version)",
       "Bash(gh --version)",
-      "Bash(gh auth *)",
       "Bash(mmdc --version)",
-      "Bash(npm install *)",
       "Bash(chmod +x /Users/daniel/Documents/GitHub/data-model/scripts/render-all.sh)",
-      "Bash(git add *)",
       "WebSearch",
-      "WebFetch(domain:github.com)",
-      "Bash(git commit *)",
-      "Bash(git push *)"
+      "WebFetch(domain:github.com)"
     ],
     "defaultMode": "auto"
   },
