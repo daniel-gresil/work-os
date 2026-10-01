@@ -16,10 +16,15 @@ A card built from a customer request is created only after Daniel approves the d
 1. The task app link (`script.google.com/.../exec?task_id=<id>`) does not load in the automated
    browser. `<id>` is a Google Doc: read it at `https://docs.google.com/document/d/<id>/mobilebasic`.
 2. Look up what the request touches (sheets, repos) before drafting; don't ask Daniel what can be checked.
+   Read sheet tabs in the browser with `/gviz/tq?tqx=out:html&sheet=<tab>&range=<A1>&headers=0`;
+   never `out:csv`, which downloads a file. Merged header cells are dropped, so find columns by
+   content too.
 3. Show the drafted card and the gaps in the spec. Settle the gaps with Daniel one question at a
    time, each with a concrete example and a recommendation.
 4. Create the card only after he approves the final draft. Questions for the requester go on the
    card and into a message Daniel sends himself.
+   Before creating, list what is still open. Any decision that changes the requester's file or
+   process is a point to confirm with them, even when Daniel has decided it; offer the message.
 
 ## Defaults
 

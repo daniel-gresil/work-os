@@ -2,4 +2,5 @@
 - [Studio over SSH has no keychain](studio-ssh-no-keychain.md) — gh, git push and 1Password prompts fail over SSH; sync over SSH directly
 - [Voice-dictated messages](voice-dictated-messages.md) — expect transcription errors; confirm ambiguous one-word answers
 - [Column ID means the row-1 number](column-id-means-row-1-number.md) — "column ID" = unique number in row 1; match columns by it
+- [Find columns by content](find-columns-by-content.md) — search the data for known values before saying a column is missing
 - [Approve means proceed](approve-means-proceed.md) — do the clear-cut parts, bring back only real decisions, prefer recoverable actions

@@ -7,3 +7,6 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 ```
 
 2026-10-01 | ado-add-task | none stated | corrected — Dan asked to review and plan before creating, and for a new Epic
+2026-10-01 | assign-column-ids | none stated | clean
+2026-10-01 | gmail-draft | L1 | clean
+2026-10-01 | ado-add-task | L2 | corrected — Dan pointed to finding columns by content and asked what was still open for the requester
