@@ -8,3 +8,4 @@ YYYY-MM-DD | client | task type | what was done
 ```
 
 2026-10-01 | gresil | claude-code-setup | built work-os: git rules, sync, skills, both Macs, repo locations
+2026-10-01 | lave | request-to-ado-card | reviewed a task-app request, settled gaps, created Epic and Issue

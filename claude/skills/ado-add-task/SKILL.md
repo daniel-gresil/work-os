@@ -8,6 +8,19 @@ description: Use when Daniel asks to add a task, issue, or card to the ADO board
 Create Issue work items on the LaveApparel / IT Dept board from a short request.
 Parse title, description, assignee, and effort from the message; everything else is fixed below.
 
+**Level: L2.** A short, fully specified request ("put X on the board") is its own approval.
+A card built from a customer request is created only after Daniel approves the drafted card.
+
+## Cards from a customer request (task app link)
+
+1. The task app link (`script.google.com/.../exec?task_id=<id>`) does not load in the automated
+   browser. `<id>` is a Google Doc: read it at `https://docs.google.com/document/d/<id>/mobilebasic`.
+2. Look up what the request touches (sheets, repos) before drafting; don't ask Daniel what can be checked.
+3. Show the drafted card and the gaps in the spec. Settle the gaps with Daniel one question at a
+   time, each with a concrete example and a recommendation.
+4. Create the card only after he approves the final draft. Questions for the requester go on the
+   card and into a message Daniel sends himself.
+
 ## Defaults
 
 | Field | Value |
@@ -39,10 +52,14 @@ For `System.AssignedTo` always send the combo format `"Name <uniqueName>"`
 ## Auth (never echo the PAT)
 
 ```bash
-[ -f ~/.cache/claude-secrets/it-tasks-dashboard/env.sh ] \
-  && source ~/.cache/claude-secrets/it-tasks-dashboard/env.sh \
-  || export ADO_PAT=$(op read "op://Private/ADO PAT it-board-dashboard/credential" --account laveapparel.1password.com)
+source ~/.cache/claude-secrets/it-tasks-dashboard/env.sh && [ -n "$ADO_PAT" ] || echo "no ADO_PAT"
 ```
+
+If that cache is missing: in a repo with an op-secrets manifest (work-os included) a hook blocks
+ad-hoc `op read`, even as a fallback inside a longer command. Add
+`ADO_PAT = op://Private/ADO PAT it-board-dashboard/credential @ laveapparel.1password.com`
+to the repo's manifest, run `~/.claude/op-secrets-load.sh`, and source that repo's cache.
+Only in a repo with no manifest, read that same reference with `op read` directly.
 
 ## Calls
 
@@ -68,6 +85,13 @@ curl -s -u ":$ADO_PAT" -X POST -H "Content-Type: application/json-patch+json" \
   {"op":"add","path":"/relations/-","value":{"rel":"System.LinkTypes.Hierarchy-Reverse","url":"https://dev.azure.com/LaveApparel/IT%20Dept/_apis/wit/workItems/<epicId>"}}
 ]'
 ```
+
+New Epic (only when Daniel asks for one): same call with `\$Epic` in the URL and just the
+Title and IterationPath entries; use the returned id as `<epicId>`.
+
+Update an existing card: `PATCH .../wit/workitems/<id>?api-version=7.1` with
+`[{"op":"replace","path":"/fields/System.Description","value":"..."}]`. Build long HTML bodies
+with `jq -n --arg d "$DESC" '[...]' | curl ... -d @-` so quotes are escaped.
 
 Drop the AssignedTo/Description entries when not provided. Reply with:
 `https://dev.azure.com/LaveApparel/IT%20Dept/_workitems/edit/<id>`
