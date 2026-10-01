@@ -14,6 +14,8 @@ Dan's work OS: the single source of his Claude Code setup (global instructions, 
 - `claude/hooks/work-os-sync.sh` runs on every session start (commit leftovers, rebase on GitHub, push) and end (commit, push). It only auto-commits an allowlist of paths; a new top-level folder must be added to that list or it will not sync. It never resolves a conflict: if it reports one, tell Dan and resolve it with him first.
 - `git/config` picks commit identity and GitHub login by repo owner: `Lave-Apparel` remotes use `daniel0souza <daniel.souza@laveapparel.com>`, everything else `daniel-gresil <daniel@gresil.com>`. `git/ignore` hides Claude files in every repo; this repo's `.gitignore` re-includes them.
 - Memory for sessions in this repo is `memory/` (set by `.claude/settings.json`). Each client repo's CLAUDE.md, secrets manifest and memory live in `clients/<client>/<repo>/` and are symlinked or pointed to from the repo's `.claude/settings.local.json`.
+- Any `claude` CLI command (for example `claude plugin install`) counts as a session and triggers the sync hook.
+- Claude Code writes settings through the `~/.claude/settings.json` symlink and keeps the link (verified 2026-10-01).
 - `.state/` is git-ignored and machine-local: pending email drafts and offboarding run files. Client email text and credentials never get committed.
 
 ## Checks

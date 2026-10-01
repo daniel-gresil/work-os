@@ -1,2 +1,4 @@
 - [Ask questions one at a time](ask-questions-one-at-a-time.md) — one question per message, with a recommendation
 - [Studio over SSH has no keychain](studio-ssh-no-keychain.md) — gh, git push and 1Password prompts fail over SSH; sync over SSH directly
+- [Voice-dictated messages](voice-dictated-messages.md) — expect transcription errors; confirm ambiguous one-word answers
+- [Approve means proceed](approve-means-proceed.md) — do the clear-cut parts, bring back only real decisions, prefer recoverable actions

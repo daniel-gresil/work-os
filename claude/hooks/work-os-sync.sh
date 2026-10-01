@@ -19,7 +19,7 @@ commit() {
   # Allowlist: only these paths are ever auto-committed. .gitignore additionally
   # keeps .env, .state/, .venv/ and settings.local.json out.
   local p
-  for p in claude git clients memory .claude setup.sh .gitignore ':(glob)*.md'; do
+  for p in claude git clients memory docs .claude setup.sh .gitignore ':(glob)*.md'; do
     git add -A -- "$p" 2>/dev/null
   done
   git diff --cached --quiet || git commit -qm "sync: $(hostname -s) $(date '+%Y-%m-%d %H:%M')"
