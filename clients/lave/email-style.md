@@ -10,3 +10,4 @@ Read before drafting. Each lesson was learned by comparing a draft with what Dan
 ## Lessons
 
 <!-- YYYY-MM-DD — lesson -->
+- 2026-10-01 — When an ADO card was created for the request, the reply includes a named link to the card before the sign-off.

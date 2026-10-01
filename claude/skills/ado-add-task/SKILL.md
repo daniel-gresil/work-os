@@ -26,6 +26,12 @@ A card built from a customer request is created only after Daniel approves the d
    Before creating, list what is still open. Any decision that changes the requester's file or
    process is a point to confirm with them, even when Daniel has decided it; offer the message.
 
+## Check for an existing card (when Daniel asks)
+
+Search every card with one WIQL query: `[System.Title]`, `[System.Description]` and
+`[System.History]` (comments) each `CONTAINS` the request's keywords, in English and Spanish.
+List the open matches with state and assignee, and read their descriptions, before drafting.
+
 ## Defaults
 
 | Field | Value |

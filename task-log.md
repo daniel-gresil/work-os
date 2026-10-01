@@ -11,3 +11,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-01 | lave | request-to-ado-card | reviewed a task-app request, settled gaps, created Epic and Issue
 2026-10-01 | lave | sheet-column-add | added a column on four tabs of a production sheet, ported the add-column function, dropdown, team email draft
 2026-10-01 | lave | request-to-ado-card | reviewed a task-app request, settled gaps one by one, created Issue under existing Epic
+2026-10-01 | lave | request-to-ado-card | checked the board for a duplicate, created Issue under existing Epic, drafted a reply asking the requester for the format
