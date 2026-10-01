@@ -1,1 +1,2 @@
 - [Ask questions one at a time](ask-questions-one-at-a-time.md) — one question per message, with a recommendation
+- [Studio over SSH has no keychain](studio-ssh-no-keychain.md) — gh, git push and 1Password prompts fail over SSH; sync over SSH directly
