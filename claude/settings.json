@@ -8,7 +8,21 @@
     "sessionUrl": false
   },
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(mmdc --version)",
+      "Bash(npm install *)",
+      "Bash(chmod +x /Users/daniel/Documents/GitHub/data-model/scripts/render-all.sh)",
+      "Bash(git add *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
+    ]
   },
   "model": "fable[1m]",
   "hooks": {
@@ -183,7 +197,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "input=$(cat); pony=$(printf '%s' \"$input\" | bash \"$(ls -d $HOME/.claude/plugins/cache/ponytail/ponytail/*/ 2>/dev/null | sort -V | tail -1)hooks/ponytail-statusline.sh\" 2>/dev/null); dir=$(printf '%s' \"$input\" | jq -r '.workspace.project_dir'); b=$(git -C \"$dir\" branch --show-current 2>/dev/null); printf '  📁 %s%s%s' \"$dir\" \"${b:+  ⎇ $b}\" \"${pony:+  $pony}\"; m=$(printf '%s' \"$input\" | jq -r '.model.display_name // .model.id // empty'); [ -n \"$m\" ] && printf '  🤖 %s' \"$m\"; pct=$(printf '%s' \"$input\" | jq -r '.context_window.used_percentage // empty'); used=$(printf '%s' \"$input\" | jq -r '.context_window.total_input_tokens // 0'); size=$(printf '%s' \"$input\" | jq -r '.context_window.context_window_size // 0'); [ -n \"$pct\" ] && printf '  🧠 %.0f%% (%dk/%dk)' \"$pct\" \"$((used/1000))\" \"$((size/1000))\"; tp=$(printf '%s' \"$input\" | jq -r '.transcript_path // empty'); [ -f \"$tp\" ] && skills=$(grep -o '\"skill\":\"[^\"]*\"' \"$tp\" 2>/dev/null | cut -d'\"' -f4 | sort -u | paste -sd, - | cut -c1-40) && [ -n \"$skills\" ] && printf '  ⚡ %s' \"$skills\"; true"
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
