@@ -1,5 +1,27 @@
 <!-- Handoffs before 2026-10-01 are in the repo's local, gitignored .claude/HANDOFF.md -->
 
+## 2026-10-01 — main — Check: Garment Dye S1238 -> Wash Type 6092 already syncing
+
+**Goal of this session:** answer a request to sync Garment Dye to Wash Type; confirm whether it was already done.
+
+**Done:**
+- Pair is in `_sync_spd_dashboard.js:96` since bc5d679 (2026-09-30), with keepIfSourceBlank.
+- Live audit: 0 mismatches over 147 matched Open Production rows (6 Garment Wash, 139 blank -> N/A kept, 2 blank both).
+- Reply sent in the requester's thread: verified, columns are syncing.
+
+**In progress:** nothing.
+
+**Open questions / blockers:**
+- Not confirmed from execution history that the nightly run fired since 09-30.
+- Orange synced-column border not checked for this pair on either sheet.
+- `.claude/scratch/audit_spd_sync.py` column list is behind SPD_SYNC_COLUMNS.
+
+**Files touched:** none.
+
+**How to verify the current state:** run the audit script with COLS set to the pair.
+
+**Next action when resuming:** check the orange border on S1238 / 6092.
+
 ## 2026-10-01 — main — New column 7289 "Div" + addColumnAllTabs
 
 **Goal of this session:** add a "Div" column to WIP Lavanderia Print so jobs can later be linked to the Garment Inventory Tracker, keeping the workflow tabs aligned.

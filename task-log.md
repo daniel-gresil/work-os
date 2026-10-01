@@ -18,3 +18,5 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-01 | lave | monthly-invoice | found the Hermes invoice instructions, ported them to the monthly-invoice-draft skill, checked it without writing a draft
 2026-10-01 | lave | request-to-ado-card | read a task-app request and the sheet, settled five gaps one by one, created Issue under existing Epic
 2026-10-01 | lave | account-issue-reply | checked a reported account deletion read-only, found the account live with an auto-reply on, drafted the reply in thread
+2026-10-01 | lave | sprint-planning | created the overdue sprint backdated to follow the previous one, scheduled the Doing cards, drafted the announcement
+2026-10-01 | lave | sync-column-check | verified a requested dashboard-to-sheet column pair was already syncing, replied in thread
