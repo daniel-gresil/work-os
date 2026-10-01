@@ -19,7 +19,15 @@ A card built from a customer request is created only after Daniel approves the d
    Read sheet tabs in the browser with `/gviz/tq?tqx=out:html&sheet=<tab>&range=<A1>&headers=0`;
    never `out:csv`, which downloads a file. Merged header cells are dropped, so find columns by
    content too.
-3. Show the drafted card and the gaps in the spec. Settle the gaps with Daniel one question at a
+   When a cell holds a link, open the linked file before asking what it is. `gviz` returns only
+   the link text; read link targets with `/htmlview/sheet?headers=true&gid=<gid>`, and list a
+   file's tabs from the `/htmlview` page source.
+   Always search the board for open cards on the same file (query below) and match their
+   conventions (Epic, schedule, lookup rules).
+3. The card covers what the request says and what Daniel describes. Downstream consequences
+   (for example, how a total should behave later) go on the card as a note or a question for the
+   requester; do not turn them into questions for Daniel.
+   Show the drafted card and the gaps in the spec. Settle the gaps with Daniel one question at a
    time, each with a concrete example and a recommendation.
 4. Create the card only after he approves the final draft. Questions for the requester go on the
    card and into a message Daniel sends himself.

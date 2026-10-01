@@ -14,3 +14,5 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-01 | lave | request-to-ado-card | checked the board for a duplicate, created Issue under existing Epic, drafted a reply asking the requester for the format
 2026-10-01 | lave | approval-request-email | fresh draft to the approver for a software license, presentation attached, original recipients copied
 2026-10-01 | lave | column-id-assign | assigned missing row-1 IDs on one tab, registered an in-use ID, opened a card for two invalid IDs
+2026-10-01 | lave | request-to-ado-card | read a task-app request and the linked files, settled scope, created Issue under existing Epic, then narrowed it
+2026-10-01 | lave | monthly-invoice | found the Hermes invoice instructions, ported them to the monthly-invoice-draft skill, checked it without writing a draft
