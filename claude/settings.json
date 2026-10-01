@@ -247,7 +247,7 @@
   },
   "effortLevel": "high",
   "fastMode": false,
-  "promptSuggestionEnabled": false,
+  "promptSuggestionEnabled": true,
   "tui": "fullscreen",
   "voice": {
     "enabled": true,

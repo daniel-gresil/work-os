@@ -22,6 +22,10 @@ A card built from a customer request is created only after Daniel approves the d
    When a cell holds a link, open the linked file before asking what it is. `gviz` returns only
    the link text; read link targets with `/htmlview/sheet?headers=true&gid=<gid>`, and list a
    file's tabs from the `/htmlview` page source.
+   The Doc and the sheets can also be read without the browser: the workspace service account
+   (`GMAIL_SA_CREDENTIAL` in the work-os secrets cache), impersonating daniel.souza@, with scopes
+   `spreadsheets` and `drive`. The `.readonly` scopes are not delegated and fail with
+   `unauthorized_client`. GET calls only.
    Always search the board for open cards on the same file (query below) and match their
    conventions (Epic, schedule, lookup rules).
 3. The card covers what the request says and what Daniel describes. Downstream consequences
