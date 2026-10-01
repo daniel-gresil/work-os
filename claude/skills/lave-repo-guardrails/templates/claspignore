@@ -1,0 +1,8 @@
+# Push ONLY the Google Apps Script source to the live project.
+# Ignore everything, then re-include the GAS files at the repo root.
+# This keeps CI files (.github/), tooling (.claude/), docs, and IDE config
+# from ever being pushed to (or deleted from) the live Apps Script project.
+**/**
+!appsscript.json
+!*.js
+!*.html

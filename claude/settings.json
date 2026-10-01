@@ -1,0 +1,264 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "fable[1m]",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/op-secrets-hook.sh pre-bash",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/work-os-sync.sh start",
+            "timeout": 30,
+            "statusMessage": "Syncing work-os…"
+          }
+        ]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/op-secrets-hook.sh session-start",
+            "timeout": 120,
+            "statusMessage": "Loading 1Password secrets into session cache…"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/daniel/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/daniel/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/work-os-sync.sh end",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "github@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "telegram@claude-plugins-official": false,
+    "explanatory-output-style@claude-plugins-official": true,
+    "microsoft-docs@claude-plugins-official": true,
+    "azure@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "mattpocock-skills@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "fastMode": false,
+  "promptSuggestionEnabled": false,
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark-daltonized",
+  "editorMode": "normal",
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: Lave Apparel (single-org context; repo remote is github.com/Lave-Apparel/website-laveapparel)",
+      "**Cloud provider(s)**: Google Workspace/Drive (via service account, for Sheets/Drive integration in the SPD order form) — no other provider configured",
+      "**Repository visibility**: private (confirmed via gh: Lave-Apparel/website-laveapparel)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: 1Password CLI (`op`), via per-repo manifest `.claude/op-secrets.txt` and user-level loader `~/.claude/op-secrets-load.sh`; cache at `~/.cache/claude-secrets/<repo-name>/env.sh` (mode 600, never committed)",
+      "**Default / protected branches**: default branch `main`; no rulesets or protected-branch rules listed via gh — but repo's own CLAUDE.md mandates never committing directly to `main` (feature branches required)",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: The trusted repo (github.com/Lave-Apparel/website-laveapparel) and its remote only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: Remote MySQL server hosting the shared `production_track` database (`sessions`, `pause_events` tables), read by this dashboard and written by the sibling Android app",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: `.claude/op-secrets.txt` (op:// references only, no secret values, committed by design); `credeciales/spd_password.txt` and `credeciales/credenciales.json` (SPD service-account credentials, share only with the production Google service account / SPD Dashboard sheet + Orders Received folder as documented); worker/session data in the `production_track` MySQL tables (personal work-session data — pause reasons, voice notes) — restrict to those operating the cutting-floor dashboard",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (e.g. the `production_track` MySQL database qualifies)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (Django web app + cutting-floor production dashboard for Lave Apparel)",
+      "**Trusted repo**: github.com/Lave-Apparel/website-laveapparel (this repo, private) and its `origin` remote only",
+      "**Org-specific CLIs**: `op` (1Password CLI, secrets loader convention); `gh`; `clasp` (Google Apps Script CLI, seen in shell history) — no further org CLIs configured",
+      "routine under .claude/ prefix: sourcing `~/.cache/claude-secrets/<repo-name>/env.sh` and reading/appending `.claude/op-secrets.txt` in this repo is routine per the session-start secrets convention"
+    ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}

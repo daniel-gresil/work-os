@@ -1,0 +1,8 @@
+# --- lave-repo-guardrails: keep non-GAS tooling out of git ---
+CLAUDE.md
+.claude/
+.mcp.json
+.clasprc.json
+.DS_Store
+.idea/
+# --- end lave-repo-guardrails ---

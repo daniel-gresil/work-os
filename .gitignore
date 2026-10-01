@@ -1,0 +1,14 @@
+# This repo is where the Claude files live, so undo the global ignore here.
+!CLAUDE.md
+!.claude/
+.claude/settings.local.json
+
+# Never synced: secrets, pending email drafts, offboarding run files.
+.env
+.env.*
+.state/
+
+# Local-only build and cache folders.
+.venv/
+__pycache__/
+.DS_Store

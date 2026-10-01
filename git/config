@@ -1,0 +1,23 @@
+# Global git rules shared by both Macs. Installed by setup.sh with:
+#   git config --global include.path ~/Developer/GitHub/work-os/git/config
+
+# Default identity: Gresil. Lave-Apparel repos are switched below by remote URL.
+[user]
+	name = daniel-gresil
+	email = daniel@gresil.com
+
+[core]
+	excludesFile = ~/Developer/GitHub/work-os/git/ignore
+
+# Push/pull login is chosen by repo owner, not by whichever account gh has active.
+[credential "https://github.com/daniel-gresil"]
+	helper =
+	helper = "!f() { test \"$1\" = get && echo username=daniel-gresil && echo \"password=$(gh auth token --user daniel-gresil)\"; }; f"
+[credential "https://github.com/Lave-Apparel"]
+	helper =
+	helper = "!f() { test \"$1\" = get && echo username=daniel0souza && echo \"password=$(gh auth token --user daniel0souza)\"; }; f"
+
+[includeIf "hasconfig:remote.*.url:https://github.com/Lave-Apparel/**"]
+	path = lave.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com:Lave-Apparel/**"]
+	path = lave.gitconfig

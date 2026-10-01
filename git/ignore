@@ -1,0 +1,11 @@
+# Claude Code files never reach client repos.
+# work-os re-includes its own in its .gitignore.
+**/.claude/
+**/CLAUDE.md
+**/CLAUDE.local.md
+**/.mcp.json
+
+# Hermes kanban worktrees: <repo>/.worktrees/<task id>/
+**/.worktrees/
+
+.DS_Store

@@ -1,0 +1,85 @@
+name: Live vs GitHub drift check
+
+# Detects when the LIVE Apps Script (ProductionWIP) is out of sync with this repo
+# — i.e. someone edited the live editor without committing, or the repo is ahead of
+# live — and posts an alert to Teams. Apps Script edits can't trigger Actions, so we
+# poll on a schedule (plus manual dispatch). Read-only: never writes to the project.
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # hourly, UTC (project tz is America/Los_Angeles)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-drift-check
+  cancel-in-progress: false
+
+env:
+  SCRIPT_ID: "14MEhXYW-GO0F12Y8hZkUuoCseAKix_9R-jwqd1KhnKcBf47TsGFAiw0c"
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet google-auth requests
+
+      - name: Fetch live script content + metadata (read-only SA)
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: python3 .github/scripts/fetch_live.py
+
+      - name: Restore previous drift signature
+        uses: actions/cache/restore@v4
+        with:
+          path: prev-sig.txt
+          key: drift-sig-${{ github.run_id }}
+          restore-keys: |
+            drift-sig-
+
+      - name: Compare live vs repo
+        id: check
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/check_drift.py \
+            --live live.json --meta meta.json --repo . \
+            --prev-sig prev-sig.txt --out-card card.json --out-sig new-sig.txt \
+            --repo-url "$REPO_URL" --repo-name "$GITHUB_REPOSITORY" | tee out.txt
+          grep -q "NOTIFY=true" out.txt && echo "notify=true" >> "$GITHUB_OUTPUT" || echo "notify=false" >> "$GITHUB_OUTPUT"
+
+      - name: Post alert to Teams
+        if: steps.check.outputs.notify == 'true'
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o resp.txt -w "%{http_code}" \
+            -H "Content-Type: application/json" \
+            --data @card.json "$TEAMS_WEBHOOK_URL")
+          echo "Teams webhook HTTP $code"
+          cat resp.txt || true
+          case "$code" in 200|201|202) : ;; *) echo "::error::Teams webhook failed ($code)"; exit 1 ;; esac
+
+      - name: Save new drift signature (state for next run)
+        if: always()
+        run: cp -f new-sig.txt prev-sig.txt 2>/dev/null || true
+
+      - name: Persist signature to cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: prev-sig.txt
+          key: drift-sig-${{ github.run_id }}
