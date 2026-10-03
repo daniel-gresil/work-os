@@ -167,7 +167,7 @@ Then one end-to-end import using the importer's own test procedure (`qb_sync_too
 
 ## Open points for Dan
 
-1. Job # and Split in 7001 use one pair of columns (IDs 6249 and 6250) holding either file's job number, plus Source. The alternative is two pairs, one per source file.
+1. ~~Job # and Split in 7001 use one pair of columns (IDs 6249 and 6250) holding either file's job number, plus Source. The alternative is two pairs, one per source file.~~ **Decided 2026-10-03: one pair plus Source.** An invoice only comes from one file; two pairs would leave half the columns empty on every row.
 2. WIP Lavandería's Unit Price formula (6136) sums a range that includes Polybag Qty (6191). Confirm which packing-supplies columns are real per-unit prices before creating them as cost columns.
 3. For invoice 22743 the 9025 rows add up to the invoice amount exactly. If the Lavandería fill does not, the "Lavandería wins" rule needs a second look for Lave jobs.
 4. Some Lavandería job rows on invoices have no Split value, and some have no VI Ref# (two of the four rows on invoice 22875). The row is still added; the Description is then built from what is there.
