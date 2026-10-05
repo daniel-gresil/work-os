@@ -1,5 +1,44 @@
 <!-- Handoffs before 2026-10-01 are in the repo's local, gitignored .claude/HANDOFF.md -->
 
+## 2026-10-01 — main — Rounding fix across SPD Assumptions, SPD Dashboard and WIP Lavanderia
+
+**Goal of this session:** prices showed $2.25 but held 2.246119…, so totals drifted by cents. Find where the decimals come from and fix them at the source and in the sync.
+
+**Done:**
+- SPD - Assumptions > Assumptions P2:Q12 (garment dye sale prices) wrapped in ROUND(,2).
+- SPD - Assumptions > Costing Database rows 5–103: all six calculated blocks ROUND(,2), each feeding the next (4,752 formulas; "option B", Dan's choice).
+- SPD Mfg Dashboard, both WIP tabs: Mill Blank Sale Price lookups (S1081..S1082) wrapped in ROUND(,2).
+- Open Production: 589 cells fixed by hand (prices and mill blank costs to 2 decimals, typed costs to 3, boxing formula ROUND(,3)).
+- PR #14 merged (dba7ebe): `round` per pair in `_sync_spd_dashboard.js` (prices 2, unit costs 3), applied by `spdRound_`; `_sync_mill_blank_cost.js` rounds to 2. Live via clasp push; both syncs run from the editor; 6,780 synced cells verified, 0 mismatches.
+
+**In progress:** nothing.
+
+**Open questions / blockers:**
+- 16 tiny typed values held back in Open Production (duties 0.0042 rows 121/122/186, logistic 0.01921 rows 248/249, polybag price 0.003–0.0096 on 11 rows).
+- Row 73 (VP-3308) polybag qty 0.01 looks like a typo; row 240 (VP-4180) is unmatched and keeps the old rounded price.
+- Costing Database refs 35–38: 2X/3X cost typed as 0 still yields a fees-only price of 0.17.
+- Dashboard duplicates: VP-4058 split 5, VP-4168 split 1. Matched rows were 111 (127 the day before); not investigated.
+- Unit Price / Total Amount Mfg in Open Production can still show a third decimal (sum of 3-decimal costs).
+- Shipped jobs whose prices moved a cent are already invoiced; SPD may need to know (6 jobs −$28.80, plus VP-4100/4167/4166/4168 −$7.50).
+- Unknown whether other files import the Costing Database blocks.
+- `.claude/scratch/audit_spd_sync.py` column list is stale; use `verify_sync.mjs` in the backup folder.
+- Two Hindsight retains are parked in `work-os/.state/pending-retains/2026-10-01-spd-pricing-chain.md` (server LLM cap on 2026-10-05); retry and delete the file.
+
+**Key decisions and why:**
+- Costs up to 3 decimals, prices and blank costs 2 — sub-cent unit costs are real prices.
+- Option B for the Costing Database (round every block, feed forward) — Dan's choice over rounding only the final price, accepting 1-cent moves (−$279.39 planned, −$28.80 shipped, −$7.50 on four dye jobs).
+- Garment dye tier-2 price computed from the unrounded sum, so it equals the old value rounded (rounding twice would shift two options).
+- The WIP lookup wrapper only rounds numbers (`IF(ISNUMBER(p),ROUND(p,2),p)`) because the Final Selling Price formula treats "" and 0 differently.
+
+**Files touched:** `_sync_spd_dashboard.js`, `_sync_mill_blank_cost.js`; sheets as listed above. Backups and scripts (gitignored): `.claude/spd-rounding-backup-2026-10-01/`.
+
+**How to verify the current state:**
+- Dump both WIP tabs and Open Production (UNFORMATTED_VALUE, via `gs2.mjs read`) into a folder as p.json / s.json / l.json, then `node .claude/spd-rounding-backup-2026-10-01/verify_sync.mjs <folder>` → 0 mismatches (ignore "Downsized": the script does not apply that derive).
+- Rollback formulas: `costing_f.json`, `assumptions_f.json`, `p_f.json`, `s_f.json` in the backup folder, written back with `gs2.mjs write`.
+
+**Next action when resuming:** check the 1 AM run's execution log, then decide on the 16 held-back values and row 73.
+
+
 ## 2026-10-01 — main — Check: Garment Dye S1238 -> Wash Type 6092 already syncing
 
 **Goal of this session:** answer a request to sync Garment Dye to Wash Type; confirm whether it was already done.
