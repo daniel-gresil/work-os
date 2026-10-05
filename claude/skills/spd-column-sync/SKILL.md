@@ -45,4 +45,4 @@ Draft / tool notes:
 When Ody asks for a value that has no dashboard column yet, Daniel adds it to the dashboard and seeds it
 once from Lavanderia; afterwards the dashboard owns it and the normal sync applies. Run
 `uv run --with google-api-python-client --with google-auth ~/.claude/skills/spd-column-sync/tools/spd_add_column.py <after_sid> <new_sid> <lav_id> "<group>" "<sizes>" "<label>"`
-(several 6-arg groups in one call). New S-ids = max row-1 S-id across all dashboard tabs + 1 (S1264 used on 2026-09-22; Garment Inventory holds S1247-S1263). Then add `{ src, lav, label }` to SPD_SYNC_COLUMNS and confirm `compare` reports all "same".
+(several 6-arg groups in one call). New S-ids = max row-1 S-id across all dashboard tabs + 1 (S1275 used on 2026-10-05; Garment Inventory holds S1247-S1263; S1036/S1037 = Ink Count Front/Back on every tab). Then add `{ src, lav, label }` to SPD_SYNC_COLUMNS and confirm `compare` reports all "same".

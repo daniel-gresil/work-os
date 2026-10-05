@@ -72,7 +72,5 @@ Hindsight is private to me and my agents. Recall from it when background would c
 
 ## Agent skills (Matt Pocock's engineering skills)
 
-- Issue tracker: GitHub Issues via `gh` when the repo has a GitHub remote; markdown under `.scratch/` when it has none. See `~/.claude/docs/agents/issue-tracker.md`.
-- Triage labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `~/.claude/docs/agents/triage-labels.md`.
 - Domain docs: `CONTEXT.md` plus `docs/adr/` at each repo root. See `~/.claude/docs/agents/domain.md`.
 - A repo-level `docs/agents/<same-file>.md` overrides the global file.

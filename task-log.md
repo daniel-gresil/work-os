@@ -20,3 +20,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-01 | lave | account-issue-reply | checked a reported account deletion read-only, found the account live with an auto-reply on, drafted the reply in thread
 2026-10-01 | lave | sprint-planning | created the overdue sprint backdated to follow the previous one, scheduled the Doing cards, drafted the announcement
 2026-10-01 | lave | sync-column-check | verified a requested dashboard-to-sheet column pair was already syncing, replied in thread
+2026-10-05 | gresil | claude-code-setup | explained the repo-task workflow and the three knowledge channels, removed the GitHub Issues convention from the global CLAUDE.md
