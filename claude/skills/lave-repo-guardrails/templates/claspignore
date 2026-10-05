@@ -6,3 +6,6 @@
 !appsscript.json
 !*.js
 !*.html
+
+# Claude Code worktrees live under .claude/ and must never reach the live project
+.claude/**

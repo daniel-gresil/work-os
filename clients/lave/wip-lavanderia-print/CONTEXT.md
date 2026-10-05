@@ -7,8 +7,11 @@ Vintage Industries' production WIP spreadsheet and the nightly syncs that move d
 ### Sheets
 
 **Lavanderia**:
-The WIP Lavanderia & Print spreadsheet; Open Production is its live tab, Shipped 2026 and Cancelled POs its archive tabs with the same column order.
+The WIP Lavanderia & Print spreadsheet; Open Production is its live tab, Shipped 2026 and Cancelled POs its history tabs with the same column order. Older shipped tabs live in the Archive.
 _Avoid_: VI WIP, Lav, Web Lavanderia
+
+**Archive**:
+WIP Lavanderia & Print - ARCHIVE 2026-10-05 (Shipped 2022-2025): a full copy of Lavanderia as of 2026-10-05 holding Shipped 2022, Shipped 2023 and Shipped Old (2024–2025). Those tabs no longer exist in Lavanderia.
 
 **Dashboard**:
 The SPD Mfg Dashboard, the customer-facing sheet SPD edits. WIP Planned and WIP Shipped are the tabs the syncs read and write.
@@ -56,4 +59,7 @@ The Lavanderia tab listing mill blank POs not yet picked up: both Blank Pick Up 
 The Tracker tab listing mill blank POs not yet received at VI (Blank Rcv VI Date blank), pushed from Open Production nightly.
 
 **Inventory Status**:
-The ledger tab number of a job's blank, derived by matching supplier + style + colorway against the Tracker. Replaces the In-stock and Availability lookups.
+The ledger tab number of a job's blank, derived by matching supplier + style + colorway against the Tracker. Replaces the In-stock and Availability lookups. Looked up in the Key table (RefLists!H:N) and shown as a link to the ledger tab; on the Tracker's Open POs view it carries id 7286.
+
+**Key table**:
+RefLists!H:N in Lavanderia: Tab, Supplier, Customer, Div, Style #, Colorway, Tab link (ids 7286–7291 in row 1, data from row 3), copied from the Tracker's Inventory tab each night by the Tracker push. Empty ledgers are skipped; a key on two ledger tabs keeps the first.

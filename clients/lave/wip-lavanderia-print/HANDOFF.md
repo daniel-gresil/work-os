@@ -1,5 +1,87 @@
 <!-- Handoffs before 2026-10-01 are in the repo's local, gitignored .claude/HANDOFF.md -->
 
+## 2026-10-05 — main — WIP Lavanderia "not enough memory": CF consolidation + archive of old shipped tabs (Ody's request)
+
+**Goal of this session:** fix Ody's "there isn't enough memory to add any columns" error in WIP Lavanderia & Print, archive the old shipped orders to another file, and prepare the unneeded-tab clean-up.
+
+**Done:**
+- Root cause: not cell count (2.27M of 10M) but 38,412 conditional-format rules (18 distinct per tab) duplicated by every row move to Shipped/Cancelled. Consolidated to 155 rules, same colours, verified per cell with live values (no cell lost a format; 14k gap fills; 510 "Not Received" cells now consistently red). Scripts: repo `.claude/scratch/cf_plan.mjs`, `cf_apply.mjs`, `cf_check.mjs`; rollback = `.claude/scratch/cf_rules_backup.json`.
+- Archive: Dan made a full copy, "WIP Lavanderia & Print - ARCHIVE 2026-10-05 (Shipped 2022-2025)" (1LnBK7IcNe--nosk4MTcYPj8MHO7WOMK2Dqrcocu8pys), verified tab by tab (`verify_copy.mjs`), shared with the 41 live-file principals without notifications (`share_archive.mjs`). Shipped 2022 / 2023 / Old deleted from the live file by Dan. File: 29→26 tabs, 2.27M→1.51M cells, 125k→53k formulas, INDIRECT 1,705→100.
+- PR #15 merged + live: `AddJobsFrom9025/getData.js:77` no longer reads Shipped Old. PR #16 (import of live-only "papeletas" edits) closed unmerged by decision; live reset to main by clasp push from a clean export.
+- ADO 361 created (Epic 351): move file ownership from it@vintageindustries.mx to a Lave Shared Drive, keep file ID; do after this clean-up.
+- Gmail draft in Ody's thread (r-286994764605565721), pending in `work-os/.state/pending-drafts/`.
+- Guardrails skill template `claspignore` now ends with `.claude/**`.
+
+**In progress:** nothing half-built.
+
+**Open questions / blockers:**
+- Ody to confirm the error is gone and which tabs can go: Copy of WIP-Samples, TemplateNewOrder, Dashboard Template, Muestras lavados, Actualize, Floor TV- Printing, Floor TV- Laundry, WA Alerts Config, WA Alerts Log, PACKING, Cuadros Printing, Invoice Pending, REPORT (Mill Blank Planning is new and stays).
+- Regrowth: row moves still carry per-row CF rules; either paste values+format without rules, or a nightly re-consolidation. Decide after Ody's test.
+- This repo's `.claspignore` still re-includes `**/*.js`, so `clasp push` from the checkout uploads `.claude/worktrees/**` (happened today, fixed by a second push). PR needed: add `.claude/**` at the end.
+- Live `_push_tracker_open_pos.js` differs from origin/main (pushed by the LAI-5141 session after its merge); drift check will flag it.
+- Drift check did not alert on the live-only papeletas edits; check why.
+- Hindsight retains for this session are pending: the server's LLM backend (ClinePass) hit its weekly cap on 2026-10-05, resets ~2026-10-06 21:00 UTC. Run `bash .state/pending-retains/2026-10-05-lavanderia-memory.sh` in work-os and delete the file once all three print RETAINED.
+- Two redundant archive files to trash: 13BjP2E4FVuM5c-BJrqEHSnDmfE_xSCkHr9Z--U8HVJE and 1N-P_J55KCDal2Wff-N8Vp7C8z4n-FMKo5ilfbEhNvnc.
+- Live file is shared "anyone with the link: viewer" and has four gmail.com editors; mirrored onto the archive as asked.
+
+**Key decisions and why:**
+- Consolidate CF before archiving — biggest win, non-destructive, reversible.
+- "Not Received" rules pinned above "Received" — the file was inconsistent; red is the evident intent.
+- Full-file copy as the archive, not tab copies — keeps cross-tab formulas and images; doubles as rollback.
+- Live-only editor edits not adopted — Dan's rule; drift action resets live to main.
+- Cancelled POs needed wip-sync-tool added to its whole-sheet protection before the API could write.
+
+**Files touched:** `AddJobsFrom9025/getData.js` (merged). Scratch scripts under the repo's gitignored `.claude/scratch/`.
+
+**How to verify the current state:**
+- `source ~/.cache/claude-secrets/wip-lavanderia-print/env.sh && GOOGLE_SA_KEY_PATH="$GCP_WIP_SYNC_SA" node .claude/scratch/inventory.mjs 1QrWLs4g-7qiz0I7x6-KAymXK0TNZX5hJJdHaCXJwztM` → 26 tabs, ~1.5M cells.
+- `... node .claude/scratch/cf_check.mjs "Shipped 2026"` → 18 rules, matches plan.
+- Live vs main: `git archive main` to a temp dir + `clasp pull` to another, diff; expect only `_push_tracker_open_pos.js` until the LAI-5141 session reconciles it.
+
+**Next action when resuming:** read Ody's reply (compare the sent email with the pending draft), then delete the confirmed tabs and open the `.claspignore` PR.
+
+
+## 2026-10-05 — 20261005_lai_5141_columns_and_sync (merged, PR #17) — Build of LAI-5141-01 "SPD Dashboard | Update Columns & Sync"
+
+**Goal of this session:** build the design settled in the morning session, one step at a time with a dry run before every sheet write, and leave it live: IDs, seven new pairs, the first reverse pair, the Mill Blank Planning view, the Tracker push, the synced-column markers, and the hand-off to Ody.
+
+**Done:**
+- IDs: 7314–7317 claimed (Administrative, WIP Lavanderia Print link), 7173/7176 completed in the registry; stamped on Open Production / Shipped 2026 / Cancelled POs (AN–AQ, AV, AW), Mill Blank Planning (I–L, O, P, Q=7286) and the Tracker's Open POs (G–J, M=7286). Shipped/Cancelled AP/AQ headers fixed to match Open Production.
+- `_sync_spd_dashboard.js`: seven pairs appended (S1035→6178, S1036→6088, S1037→6089, S1275→6090, S1273→7176, S1274→7173, S1268→6062 with `formula: true`); `spdFormula_` (literal-URL IMAGE allow-list) and `spdSafe_` (no "=" text across files); `SPD_REVERSE_COLUMNS` + `syncToSpdDashboard` (7315→S1012, keepIfSourceBlank) called at the end of the nightly sync; self-check extended.
+- `_push_tracker_open_pos.js` (new): `pushToGarmentInventoryTracker` + `installTrackerPushTrigger` (2 AM PT) + `test_trackerPush`. Ran once by hand: 51 key rows, 381 Open POs rows, 37 with status.
+- Seeds: dashboard from Lavanderia 219 cells + 2 target-row ids; Lavanderia AO from S1012 122 cells (d-mmm format); RefLists!H1:N53 key table.
+- Mill Blank Planning: sample row cleared, array formula in A4 (388 rows), I:N d-mmm-yyyy; formula text in `docs/mill-blank-planning-formula.md` (this folder). Stray space cleared in Open Production AS111.
+- Markers: orange border on 74 synced columns per tab (dashboard row 2, Open Production row 3); seven pink target cells → grey on WIP Planned.
+- Record sheet `13PYbQYl4myAocP9YKWhEep8I3CDcMivyLPKFt53iLV4` (six tabs, Image skipped) and standalone Gmail draft `r5376522016129455455` to Ody.
+- Deployed: PR #17 merged (4cb7dee), live pushed from a git-archive export of main, verified by clasp pull diff (25 files).
+
+**In progress:** nothing.
+
+**Open questions / blockers:**
+- The first live run of the new pairs and the reverse pass is the 1:24 AM PT trigger on 2026-10-06; the manual run from the editor was denied by the auto-mode classifier. Check the execution log for `syncFromSpdDashboard` and `syncToSpdDashboard` summaries.
+- Tracker Open POs date cells beyond the old sample row show m/d/yyyy; one manual format pass on H:L fixes it (the push keeps formats).
+- Four Tracker keys on two ledger tabs (018/025, 019/026, 035/038, 011/050): first wins until Ody merges them. 66 Open POs keys unknown to the Tracker; 278 Open Production rows without mill blank identity.
+- Ody's draft has no CC and is standalone (no task-app thread found by email); send or paste into the task app.
+- Earlier-session items untouched: 16 held-back tiny values, row 73 polybag qty, Costing Database refs 35–38.
+
+**Key decisions and why:**
+- Reverse pair keeps the dashboard value when Lavanderia is blank — SPD types "Stock"/"P" on new jobs before VI dates the PO.
+- Reverse pass chained after the forward sync, not a second trigger — no editor step, deterministic order.
+- Tracker push is its own trigger at 2 AM — different file and concern; the editor step was needed anyway for the first run.
+- Only literal-URL IMAGE formulas cross files; "=" text never does — the dashboard is customer-edited (three security-review findings).
+- Inventory Status is a hyperlink to the ledger tab (handoff default, confirmed).
+- RefLists key table seeded by API in step 6 so column Q was not blank while waiting for deploy (Dan flagged the gap).
+
+**Files touched:** client repo `_sync_spd_dashboard.js`, `_push_tracker_open_pos.js` (merged). work-os: this file, `CONTEXT.md` (Inventory Status, Key table), `docs/mill-blank-planning-formula.md`, `task-log.md`, `skill-usage.md`. Project memory: `lavanderia-writes-via-assign-tool-oauth.md`, `no-visible-gaps-between-steps.md`, `MEMORY.md`.
+
+**How to verify the current state:**
+- `git status` clean on the branch; `git log origin/main -1` = 4cb7dee. `clasp pull` into a temp dir from a `git archive origin/main` export + `.clasp.json` → no diffs in *.js/*.html.
+- Sheets: Mill Blank Planning A4 formula, 388 rows, Q 44 non-blank; RefLists H1:N53; Tracker Open POs 381 rows; row 1 of the three workflow tabs identical (226 columns).
+- Editor: `test_spdKey`, `test_trackerPush` print OK.
+
+**Next action when resuming:** read the 2026-10-06 execution log for the 1 AM sync (forward + reverse summaries), then audit the seven pairs (0 "seed" cells, 17 flipped) and S1012 on both tabs; then send or paste Ody's draft.
+
+
 ## 2026-10-05 — main (no branch) — Design grill for task LAI-5141-01 "SPD Dashboard | Update Columns & Sync"
 
 **Goal of this session:** turn Ody's task-app request (dashboard column IDs, new sync pairs, Mill Blank Planning / Open POs views) into a settled design before any build. No code changed.

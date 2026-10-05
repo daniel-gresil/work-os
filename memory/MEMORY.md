@@ -8,3 +8,7 @@
 - [Skip copy tabs](skip-copy-tabs.md) — leave "Copy of…" and personal copy tabs out when listing tabs that need work
 - [Answer the complaint only](answer-the-complaint-only.md) — address what the sender complains about; adjacent findings get one line, not plan steps
 - [No GitHub Issues](no-github-issues.md) — tasks go to the ADO board via ado-add-task, never gh issue
+- [Analysis before changes](analysis-before-changes.md) — new request: read-only analysis and a recommendation first, then wait for go
+- [Full file copy for archives](prefer-full-file-copy-for-archives.md) — File > Make a copy, verify, then delete tabs; never tab-by-tab
+- [Live editor edits not adopted](live-editor-edits-not-adopted.md) — code edited live without a PR is not imported; drift action resets live to main
+- [Blocked writes: hand over the command](blocked-sheet-writes-hand-over-the-command.md) — classifier denial on a sheet write or merge: give Dan the ! command

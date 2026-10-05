@@ -25,3 +25,10 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-01 | gmail-draft | L1 | clean
 2026-10-05 | grill-with-docs | (plugin, no level) | corrected — Dan asked for one question at a time instead of the whole frontier
 2026-10-05 | assign-column-ids | L2 | clean (read-only find and registry lookups, nothing claimed)
+2026-10-05 | create-branch | (none stated) | clean
+2026-10-05 | assign-column-ids | L2 | clean
+2026-10-05 | spd-column-sync | (none stated) | clean (six pairs in one record sheet, standalone draft)
+2026-10-05 | ado-add-task | L2 | clean
+2026-10-05 | create-branch | (none stated) | clean
+2026-10-05 | draft-email-reply | L1 | clean
+2026-10-05 | gmail-draft | L1 | clean
