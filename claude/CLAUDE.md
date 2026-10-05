@@ -72,5 +72,5 @@ Hindsight is private to me and my agents. Recall from it when background would c
 
 ## Agent skills (Matt Pocock's engineering skills)
 
-- Domain docs: `CONTEXT.md` plus `docs/adr/` at each repo root. See `~/.claude/docs/agents/domain.md`.
+- Domain docs: `CONTEXT.md` plus `docs/adr/` at the repo root for my own repos. For client repos they live in `work-os/clients/<client>/<repo>/`, never in the repo. See `~/.claude/docs/agents/domain.md`.
 - A repo-level `docs/agents/<same-file>.md` overrides the global file.

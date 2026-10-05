@@ -23,3 +23,5 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-01 | sprint-planning | (none stated) | clean
 2026-10-01 | draft-email-reply | L1 | corrected — Dan replaced a detailed draft with a one-line confirmation
 2026-10-01 | gmail-draft | L1 | clean
+2026-10-05 | grill-with-docs | (plugin, no level) | corrected — Dan asked for one question at a time instead of the whole frontier
+2026-10-05 | assign-column-ids | L2 | clean (read-only find and registry lookups, nothing claimed)

@@ -1,5 +1,36 @@
 <!-- Handoffs before 2026-10-01 are in the repo's local, gitignored .claude/HANDOFF.md -->
 
+## 2026-10-05 — main (no branch) — Design grill for task LAI-5141-01 "SPD Dashboard | Update Columns & Sync"
+
+**Goal of this session:** turn Ody's task-app request (dashboard column IDs, new sync pairs, Mill Blank Planning / Open POs views) into a settled design before any build. No code changed.
+
+**Done:**
+- Read the task page (Chrome; see memory `task-app-page-reading`). Dashboard S-ids S1266–S1275 were already assigned on all three tabs by an earlier session today; items 1, 2, 4–7 are closed.
+- Nine decisions settled one at a time; glossary in `CONTEXT.md` and ADR `docs/adr/0001-cross-file-data-moves-by-scripted-push.md` in this folder (moved out of the client repo at Dan's request).
+- Matched-row comparison of the seven candidate pairs (122 matched jobs): 132 Lave-only cells, 17 disagreements. Script pattern: session scratch `matched.mjs` (ephemeral; rebuild from `audit_spd_sync.py` or the spd-column-sync tool).
+
+**In progress:** nothing. Build has not started.
+
+**Open questions / blockers:**
+- Inventory Status cell will be a hyperlink to the ledger tab unless Dan says plain text.
+- The IMAGE pair (S1268→6062) needs a `formula: true` flag in the engine (getValues returns "" for IMAGE cells).
+- Writes to WIP Lavanderia via the API need the delegated subject; the classifier blocked impersonated Drive reads this session, so expect the same for Sheets writes as that user — fall back to Apps Script runs from the editor.
+
+**Key decisions and why:**
+- IDs: 7176 COO, 7173 Content (registry rows reserved for VI, unstamped), 7314–7317 for the four blank-date columns; stamped on Open Production, Shipped 2026, Cancelled POs, Mill Blank Planning. No column inserted.
+- Seven dashboard→Lave pairs (S1035→6178, S1036→6088, S1037→6089, S1275→6090, S1273→7176, S1274→7173, S1268→6062 formula copy): seed the dashboard from Lave once where blank, then full overwrite — nothing lost, SPD becomes the single owner. Pink target cells → grey + orange border (`mark_synced_columns.mjs` + fill change).
+- First reverse pair Lave AO (7315 Blank PO Issue Date) → S1012 Issued on both dashboard tabs: seed AO from S1012 first, keep "Stock"/"P" as-is.
+- Mill Blank Planning = formula view over Open Production by row-1 id, rows while Pick Up Date AND 6162 both blank. Inventory Status derived (supplier+style+colorway → tracker Tab 7286). In-stock / Availability columns dropped.
+- Tracker Open POs = nightly scripted push from this repo (6164 blank); same pass copies the tracker's Inventory key table into Lave RefLists. Never IMPORTRANGE (ADR 0001).
+- Hand-off: one comparison sheet over the seven pairs + one reply draft to Ody in the task thread.
+
+**Files touched:** none in the client repo. In work-os: this file, `CONTEXT.md`, `docs/adr/0001-…md`, `memory/ask-questions-one-at-a-time.md`, `task-log.md`, `skill-usage.md`, `claude/CLAUDE.md` (domain docs line).
+
+**How to verify the current state:** `git status` in the client repo is clean on `main`; `ls ~/Developer/GitHub/work-os/clients/lave/wip-lavanderia-print/` shows CONTEXT.md + docs/adr.
+
+**Next action when resuming:** new session in the client repo, ask which branch to start from (expect `main`), create `20261005_lai_5141_columns_and_sync`, build in this order: (1) stamp IDs via assign-column-ids, (2) pairs + formula flag + seeds, (3) reverse sync function, (4) Mill Blank Planning formula, (5) tracker push + RefLists copy, (6) borders/fills, (7) comparison sheet + draft. Avoid the 1:20–1:45 AM Pacific window.
+
+
 ## 2026-10-01 — main — Rounding fix across SPD Assumptions, SPD Dashboard and WIP Lavanderia
 
 **Goal of this session:** prices showed $2.25 but held 2.246119…, so totals drifted by cents. Find where the decimals come from and fix them at the source and in the sync.
