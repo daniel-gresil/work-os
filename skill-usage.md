@@ -32,3 +32,5 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-05 | create-branch | (none stated) | clean
 2026-10-05 | draft-email-reply | L1 | clean
 2026-10-05 | gmail-draft | L1 | clean
+2026-10-05 | spd-column-sync | (none stated) | corrected — Dan rejected the tool's plain-text draft: no tables, bare URL; rebuilt as HTML with gmail-draft
+2026-10-05 | gmail-draft | L1 | clean (six clean in a row; Dan keeps L1, drafts are the tool ceiling)

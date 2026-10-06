@@ -25,3 +25,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-05 | lave | task-design-grill | read a task-app request, settled nine design decisions one at a time, wrote the glossary and an ADR to work-os
 2026-10-05 | lave | task-build | built the settled LAI-5141 design: IDs stamped, seven sync pairs, reverse pass, tracker push, planning-view formula, comparison sheet and draft; merged and deployed
 2026-10-05 | lave | sheet-memory-cleanup | consolidated conditional formatting file-wide, archived three old shipped tabs to a verified full copy, one-line code change live, reply drafted
+2026-10-05 | lave | policy-email | drafted a bilingual note to one employee on AI-generated code in shared sheets, no recipient yet
