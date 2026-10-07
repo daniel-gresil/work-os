@@ -36,6 +36,16 @@ Per pair `<S-id> <lav_id>`:
 
 Report in chat: counts table, what changes on the first run, sheet link, draft id. Keep it short.
 
+Lessons from 2026-10-06 (S1039 -> 6073):
+- A pair is not done until one manual run of `syncFromSpdDashboard` completes in the editor ("Execution completed", `cellsNotWritten: []`).
+  The three pairs added on 2026-10-05 were reported live without a run and had stopped every sync since.
+- Date pairs: the tool compares formatted text ("Mon, Oct 26" vs "26-Oct") and calls every row different. Compare raw dates
+  (UNFORMATTED_VALUE) until `spd_compare.py` does it itself; build the record sheet BEFORE the first run, afterwards both sides are equal.
+- Credentials: load the two service-account keys from the op cache (`GOOGLE_SA_KEY_PATH`, `GCP_WIP_SYNC_SA`) into the tool's `_SA`
+  instead of letting it read 1Password directly; the repo's hook blocks direct reads.
+- A reply that goes into the task app cannot be typed by Claude: put clean HTML (p, strong, ul, a; no styles) on the clipboard with
+  `osascript -e 'set the clipboard to «data HTML<hex>»'`, place the cursor in "New Comment", and Dan pastes.
+
 Draft / tool notes:
 - No email thread? Pass `"to:<addr>"` as the search and set `DRAFT_SUBJECT`; the draft is a fresh email, no "Re:".
 - `DRAFT_BODY` skips the record-URL substitution: put the sheet link in the body yourself.

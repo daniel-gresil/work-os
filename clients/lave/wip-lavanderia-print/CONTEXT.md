@@ -38,6 +38,12 @@ Row 2 of the Dashboard, where the Lavanderia ID a column is meant to reach is wr
 **Owner row**:
 Row 3 of the Dashboard (row 3 on Lavanderia), naming who types into the column: SPD, VI, or a person.
 
+**Pasted image**:
+A picture inserted into an Image cell instead of the IMAGE formula. The sync never copies it and the nightly check reports it.
+
+**Cell-by-cell pair**:
+A pair written only where the value changes, because its Lavanderia column holds content a script cannot write back (pictures, strict dropdowns).
+
 **Job key**:
 The VI job number plus split that matches a row across sheets; a blank split means 01, TBD means no key.
 

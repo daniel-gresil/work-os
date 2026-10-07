@@ -26,3 +26,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-05 | lave | task-build | built the settled LAI-5141 design: IDs stamped, seven sync pairs, reverse pass, tracker push, planning-view formula, comparison sheet and draft; merged and deployed
 2026-10-05 | lave | sheet-memory-cleanup | consolidated conditional formatting file-wide, archived three old shipped tabs to a verified full copy, one-line code change live, reply drafted
 2026-10-05 | lave | policy-email | drafted a bilingual note to one employee on AI-generated code in shared sheets, no recipient yet
+2026-10-06 | lave | task-build | grilled then built a sync source change and a link-format fix; found and fixed two faults stopping the nightly sync; added a check to the nightly email; merged and deployed

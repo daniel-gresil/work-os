@@ -16,3 +16,4 @@ Read before drafting. Each lesson was learned by comparing a draft with what Dan
 - 2026-10-05 — Replies go to everyone on the thread (reply-all), not only the sender, and open with "Hi team" when there are several.
 - 2026-10-05 — A link to a file uses the file's title as the link text, never a bare URL.
 - 2026-10-05 — A list of items the reader must choose among goes one per line, not comma-separated inside a sentence.
+- 2026-10-06 — When an email tells people where to send IT requests, give the helpdesk address and Dan's own address together.

@@ -1,5 +1,46 @@
 <!-- Handoffs before 2026-10-01 are in the repo's local, gitignored .claude/HANDOFF.md -->
 
+## 2026-10-06 — main (PRs #19–#22 merged) — LAI-5141-01 follow-up: S1039 -> 6073, C6273 link look, and two faults that stopped the nightly sync
+
+**Goal of this session:** Ody's 2026-10-05 update on LAI-5141-01: move the Cust. Due Date sync from the SPD date (S1038) to the VI date (S1039), and make the Blank Purchase Order links in Lavanderia look like links. The manual verification run then showed the sync had not completed since the 2026-10-05 deploy, so that was fixed too.
+
+**Done:**
+- `_sync_spd_dashboard.js`: pair `S1039 -> 6073` replaces `S1038 -> 6073`; link cells set `#1155cc` + underline after the rich text write (one `getRangeList` call); Image pair written cell by cell and a pasted picture on the dashboard is never copied (`spdFormula_`); `cells: true` on COO (7176) and Content (7173), each cell write flushed inside a `try`, refused cells in the summary as `cellsNotWritten`.
+- `_check_job_split_duplicates.js`: fourth section in the nightly email, Image cells that are not `=IMAGE("https://...")` on the dashboard (S1268) and Open Production (6062); `imgProblem_`.
+- Sheets: WIP Shipped row 2 now S1039 = 6073, S1038 blank; orange border on S1039 and off S1038 on both dashboard tabs, off 6072 on Open Production row 3; 76 + 23 link cells in 6273 restyled (Open Production, Shipped 2026). Backup of the marker cells: repo `.claude/scratch/s1039_markers_backup_2026-10-06.json`.
+- Fourth manual run of `syncFromSpdDashboard` completed in 4 min 18 s: matched 131, `cellsNotWritten: []`, reverse sync ran (130 dashboard rows matched). Verified by API: 6073 = S1039 on 131/131; 81 link cells blue + underlined; Image, COO, Content with no difference left.
+- Record sheet `1GbJmGCHsgsCN71iRzlcvftZBtbcnUhEZ7iyOsVNgwTk` (131 rows: 116 change, 6 filled, 9 same), built before the first run; shared with Ody as editor, no notification.
+- Live = `main` at `4b87cbd`, checked by clasp pull + diff (31 files; live has CRLF line endings from another machine).
+
+**In progress:** nothing half-built.
+
+**Open questions / blockers:**
+- The comment for Ody is not posted: clean HTML is on the MacBook clipboard and the task page is open at "New Comment". Claude cannot type there (keys do not reach the frame; macOS denies osascript keystrokes). The text is in the session transcript.
+- First scheduled runs with this code: sync 1:24 AM PT 2026-10-06, check email 2–3 AM PT (first with the Image section; expect VP-2044 and VP-2045, both on Open Production).
+- COO has five hand-typed values outside its dropdown (AV97, AV99, AV141, AV160, AV345) and VP-4248 has `#REF!` in the eleven Mill Blank Order Qty columns on the dashboard, copied into Lavanderia. Both left for Ody.
+- 6072 (VI Ship Date) stays hand-typed and now mostly duplicates 6073; Summary WIP and Summary Shipped bucket by 6072.
+- Converting a pasted picture to the IMAGE formula automatically: deferred. Needs a one-cell test of `CellImage.getContentUrl()`, a new "external request" scope (trigger owner must re-authorize), a Drive folder and a decision on link-public files.
+- `spd_compare.py` compares dates as formatted text and reads 1Password directly; tonight's wrapper (scratchpad, not kept) patched both. Fold it into the tool.
+- The email subject of the nightly check still starts with "VI Ref# + Split:" even when only Image cells are listed.
+- Yesterday's worktree `20261005_lai_5141_columns_and_sync` and four old branches are still on GitHub (0917 dashboard columns, 1005 drop shipped old, 1005 import papeletas, 1005 lai 5141).
+- Resolved from 2026-10-05: live `_push_tracker_open_pos.js` no longer differs from `main`.
+
+**Key decisions and why:**
+- Direction dashboard -> Lavanderia for S1039 — the target row has always meant that, and Ody edited it on the dashboard.
+- Summary tabs left on 6072 — switching to 6073 would move 189 of 1,096 shipped rows to another month.
+- Cell-by-cell only for the Image, COO and Content pairs, not all 73 — see ADR 0002.
+- Link look set at cell level after the write, not inside the rich text value — works whatever style the write stamps.
+- Check added to the existing nightly email, no new trigger — same recipients (Lists!S3), same schedule.
+
+**Files touched:** client repo `_sync_spd_dashboard.js`, `_check_job_split_duplicates.js` (merged). work-os: this file, `CONTEXT.md` (Pasted image, Cell-by-cell pair), `docs/adr/0002-…`, `claude/skills/spd-column-sync/SKILL.md`, `task-log.md`, `skill-usage.md`, `clients/lave/email-style.md`. Project memory: `grilling-one-question-at-a-time.md`, `merge-needs-per-pr-go-ahead.md`, updates to `lavanderia-writes-via-assign-tool-oauth.md` and `task-app-page-reading.md`.
+
+**How to verify the current state:**
+- `git log origin/main -1` = 4b87cbd; `git archive origin/main` to a temp dir + `clasp pull` to another, `diff -rq --strip-trailing-cr` -> no differences.
+- Editor: `test_spdKey` and `test_dupCheck` print OK. Executions page: `syncFromSpdDashboard` ends with "Execution completed" and `cellsNotWritten: []`.
+- Sheets API: Open Production 6073 equals dashboard S1039 on every matched job; 6273 link cells have underline + `#1155cc`.
+
+**Next action when resuming:** check the Executions page for the 1:24 AM PT run and the 2–3 AM check email, then confirm the comment reached Ody.
+
 ## 2026-10-05 — main — WIP Lavanderia "not enough memory": CF consolidation + archive of old shipped tabs (Ody's request)
 
 **Goal of this session:** fix Ody's "there isn't enough memory to add any columns" error in WIP Lavanderia & Print, archive the old shipped orders to another file, and prepare the unneeded-tab clean-up.
