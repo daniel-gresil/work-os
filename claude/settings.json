@@ -209,9 +209,9 @@
     "microsoft-docs@claude-plugins-official": true,
     "azure@claude-plugins-official": true,
     "ponytail@ponytail": true,
-    "mattpocock-skills@claude-plugins-official": true,
     "hindsight-memory@hindsight": true,
-    "last30days@last30days-skill": true
+    "last30days@last30days-skill": true,
+    "mattpocock-skills@mattpocock": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
