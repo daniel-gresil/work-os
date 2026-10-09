@@ -243,6 +243,12 @@
         "source": "github",
         "repo": "mvanhorn/last30days-skill"
       }
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
     }
   },
   "effortLevel": "high",
