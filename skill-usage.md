@@ -39,3 +39,4 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-09 | ado-add-task | L2 | clean
 2026-10-09 | draft-email-reply | L1 | clean (updated Dan's own started draft)
 2026-10-09 | gmail-draft | L1 | clean
+2026-10-05 | ado-add-task | L2 | corrected — Dan asked for a plain-language before/after explanation of the design

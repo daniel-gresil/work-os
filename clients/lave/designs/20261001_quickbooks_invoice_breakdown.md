@@ -68,7 +68,7 @@ Identity columns (rows 2 to 4 blank):
 
 Cost columns to create, each with the ID it has in its source:
 
-- **From WIP Lavandería**: 6124 Embroidery, 6125 Garment Dye Treatment, 6126 Grinding, 6127 cropping / sewing, 6128 Front print, 6129 Back print, 6130 Neck print, 6168 Transfer, 6131 Sleeve print, 6152 Rhinestones, 6132 Packaging Labor, 6133 Logistic, 6135 Duties, 6134 Set up / Extras, 6153 Dev Fee, the packing-supplies columns that feed Unit Price (6136), and 6242 Mill Blank Sale Price Total (`Per job`).
+- **From WIP Lavandería**: 6124 Embroidery, 6125 Garment Dye Treatment, 6126 Grinding, 6127 cropping / sewing, 6128 Front print, 6129 Back print, 6130 Neck print, 6168 Transfer, 6131 Sleeve print, 6152 Rhinestones, 6132 Packaging Labor, 6133 Logistic, 6135 Duties, 6134 Set up / Extras, 6153 Dev Fee, the six per-unit packing-supplies columns 6190 Polybag Price, 6189 Box Cost per Unit, 6194 Price Tickets, 6195 Dept Label, 6196 Size Strips, 6197 Barcode Stickers, and 6242 Mill Blank Sale Price Total (`Per job`). Not cost columns: 6191 Polybag Qty, 6008 Polybag Type, 6192 Box price per box, 6193 Box Qty (inputs, not prices), 6198 Pallet Cost (never used) and 6154 TBD #2 (six rows, values up to 12, not per unit); accounting can add either later by inserting a column with its ID in row 1.
 - **From 9025**: 7056 M.O., 4220 Cutting, 7209 Sewing, 7210 Transfer Application, 7095 Front Print, 7096 Back Print, 7097 Neck Print, 7099 Packaging, 7211 Garment Dye, 7212 Other Wash, 7102 Extras, 7213 Taxes, 7214 Freight/Pedimento.
 
 The existing 9192 sewing columns (1636, 1590, 1497, ...) and the 9192 lookup are removed. 9192 is no longer used.
@@ -136,6 +136,8 @@ Do not use 7002 `Items` column B (7626) any more. Leave the column in place.
 - The export never multiplies. Amounts are final when they are in the cells.
 - An invoice with several jobs is valid: several rows, one invoice number, one QuickBooks invoice.
 - Dry behaviour first: both functions validate everything for an invoice before writing anything for it.
+- Read source prices as raw cell values (`getValues()`, never `getDisplayValues()`). WIP Lavandería prices carry three decimals (Packaging 0.197, Price Tickets 0.065) and display rounded; invoice 22875 only reconciles to $3,126.60 from the raw values. Per-cell rounding to cents after multiplying can still drift a cent from Unit Price × quantity on odd quantities; when the total check fails by cents, the status message shows the difference and the accountant adjusts one cell.
+- Read whole tabs, never a fixed row window. `Shipped 2026` had 1,198 rows on 2026-10-09 and invoice 22875 sat on rows 1095 to 1098. Column letters also move (eight columns were inserted between 2026-10-03 and 2026-10-09), which is why everything is found by row-1 ID.
 
 ## Checks to leave behind
 
@@ -168,6 +170,6 @@ Then one end-to-end import using the importer's own test procedure (`qb_sync_too
 ## Open points for Dan
 
 1. ~~Job # and Split in 7001 use one pair of columns (IDs 6249 and 6250) holding either file's job number, plus Source. The alternative is two pairs, one per source file.~~ **Decided 2026-10-03: one pair plus Source.** An invoice only comes from one file; two pairs would leave half the columns empty on every row.
-2. WIP Lavandería's Unit Price formula (6136) sums a range that includes Polybag Qty (6191). Confirm which packing-supplies columns are real per-unit prices before creating them as cost columns.
-3. For invoice 22743 the 9025 rows add up to the invoice amount exactly. If the Lavandería fill does not, the "Lavandería wins" rule needs a second look for Lave jobs.
+2. ~~WIP Lavandería's Unit Price formula (6136) sums a range that includes Polybag Qty (6191). Confirm which packing-supplies columns are real per-unit prices before creating them as cost columns.~~ **Decided 2026-10-09: the six columns listed in section 1.** Found on the way: the Unit Price formula differs by row (Shipped 2026 mostly `SUM(DL:DX)`, which excludes Set up and Dev Fee; Open Production mostly `SUM(DL:EB)+EF+SUM(EG:EL)`, which includes Polybag Qty, so 33 rows carry one dollar too much). The 7001 fill multiplies each column's own price by quantity and is unaffected; mismatches surface in the export's total check.
+3. ~~For invoice 22743 the 9025 rows add up to the invoice amount exactly. If the Lavandería fill does not, the "Lavandería wins" rule needs a second look for Lave jobs.~~ **Checked 2026-10-09: the Lavandería fill is $1,330.56 too** (one row, VP-3325, 1,232 units: Front print 0.60, Neck print 0.13, Packaging 0.35). Both files agree, so "Lavandería wins" stands.
 4. Some Lavandería job rows on invoices have no Split value, and some have no VI Ref# (two of the four rows on invoice 22875). The row is still added; the Description is then built from what is there.

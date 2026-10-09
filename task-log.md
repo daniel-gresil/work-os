@@ -29,3 +29,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-06 | lave | task-build | grilled then built a sync source change and a link-format fix; found and fixed two faults stopping the nightly sync; added a check to the nightly email; merged and deployed
 2026-10-09 | lave | request-to-ado-card | read an email request and two repos, settled eight decisions one at a time, created Issue under existing Epic with screenshot, updated the reply draft with sprint dates
 2026-10-09 | lave | billing-alert-check | checked three Google payment-declined emails against the Admin Console and mailbox; all paid same day on retry, nothing owed
+2026-10-05 | lave | request-to-ado-card | read a task-app request, two sheets and one repo; settled the design in three rounds; card update and a second card pending the requester's open points
