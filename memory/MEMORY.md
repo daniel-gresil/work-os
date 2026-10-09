@@ -13,3 +13,4 @@
 - [Live editor edits not adopted](live-editor-edits-not-adopted.md) — code edited live without a PR is not imported; drift action resets live to main
 - [Blocked writes: hand over the command](blocked-sheet-writes-hand-over-the-command.md) — classifier denial on a sheet write or merge: give Dan the ! command
 - [ADO spec references existing code](ado-spec-reference-existing-code.md) — card that mirrors a feature names the reference file and function in the other repo
+- [Lead with the verdict](lead-with-the-verdict.md) — investigation report opens with the verdict and whether Dan must act
