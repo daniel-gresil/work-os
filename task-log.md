@@ -27,3 +27,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-05 | lave | sheet-memory-cleanup | consolidated conditional formatting file-wide, archived three old shipped tabs to a verified full copy, one-line code change live, reply drafted
 2026-10-05 | lave | policy-email | drafted a bilingual note to one employee on AI-generated code in shared sheets, no recipient yet
 2026-10-06 | lave | task-build | grilled then built a sync source change and a link-format fix; found and fixed two faults stopping the nightly sync; added a check to the nightly email; merged and deployed
+2026-10-09 | lave | request-to-ado-card | read an email request and two repos, settled eight decisions one at a time, created Issue under existing Epic with screenshot, updated the reply draft with sprint dates

@@ -28,7 +28,9 @@ $RUN --script $READ thread --query 'from:person@example.com subject:"…" newer_
 
 Add `--attachments-dir /abs/scratchpad/attachments` to also download the thread's attachments (saved per message id), for reading or re-attaching.
 
-If the newest match is not the email Dan means, tighten the query; do not guess. The thread text is client content: use it, do not save it anywhere in the repo.
+If the newest match is not the email Dan means, tighten the query; do not guess.
+If the thread read shows a `DRAFT` message from Dan, he has started the reply himself: update that draft with
+`$RUN update --draft-id <id>` (same options as create) instead of creating a second one. The thread text is client content: use it, do not save it anywhere in the repo.
 
 ## Step 2 — Prepare
 

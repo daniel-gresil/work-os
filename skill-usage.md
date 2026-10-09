@@ -35,3 +35,7 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-05 | spd-column-sync | (none stated) | corrected — Dan rejected the tool's plain-text draft: no tables, bare URL; rebuilt as HTML with gmail-draft
 2026-10-05 | gmail-draft | L1 | clean (six clean in a row; Dan keeps L1, drafts are the tool ceiling)
 2026-10-06 | spd-column-sync | (none stated) | clean (record sheet only; tool needed a wrapper for date comparison and cached credentials)
+2026-10-09 | grill-with-docs | (plugin, no level) | clean (one question at a time held)
+2026-10-09 | ado-add-task | L2 | clean
+2026-10-09 | draft-email-reply | L1 | clean (updated Dan's own started draft)
+2026-10-09 | gmail-draft | L1 | clean

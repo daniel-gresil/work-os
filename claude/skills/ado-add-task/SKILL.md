@@ -35,10 +35,19 @@ A card built from a customer request is created only after Daniel approves the d
    time, each with a concrete example and a recommendation.
 4. Create the card only after he approves the final draft. Questions for the requester go on the
    card and into a message Daniel sends himself.
+   When the card is assigned, the assignee takes the requester questions; Dan's reply only links
+   the card and names the sprint.
    Before creating, list what is still open. Any decision that changes the requester's file or
    process is a point to confirm with them, even when Daniel has decided it; offer the message.
    Ask Daniel whether each such point is already confirmed before listing it for the requester;
    when he confirms it, state it as a rule on the card and drop the message.
+
+## Attach a screenshot
+
+Upload first, then link it from the card: `POST $B/attachments?fileName=<name>.png&api-version=7.1` with
+`Content-Type: application/octet-stream` and `--data-binary @file` returns `{url}`. In the create or PATCH body add
+`{"op":"add","path":"/relations/-","value":{"rel":"AttachedFile","url":"<url>"}}` and end the description with
+`<img src="<url>" style="max-width:100%">` so it renders inline.
 
 ## Check for an existing card (when Daniel asks)
 
@@ -122,6 +131,9 @@ Drop the AssignedTo/Description entries when not provided. Reply with:
 `https://dev.azure.com/LaveApparel/IT%20Dept/_workitems/edit/<id>`
 
 ## Errors
+
+If the create call's output fails to parse, query WIQL for the title before retrying; the card may
+already exist (it did on 2026-10-09).
 
 On any failure: report the API error verbatim AND the full intended card content
 (title/description/assignee/effort/epic) so nothing is lost. One retry on transient
