@@ -26,6 +26,9 @@ A card built from a customer request is created only after Daniel approves the d
    (`GMAIL_SA_CREDENTIAL` in the work-os secrets cache), impersonating daniel.souza@, with scopes
    `spreadsheets` and `drive`. The `.readonly` scopes are not delegated and fail with
    `unauthorized_client`. GET calls only.
+   Concrete recipe: Drive `files/<id>/export?mimeType=text/plain` with scope `drive`, run through
+   `claude/skills/gmail-draft/run.sh --script <py>` (that venv has google-auth). The `mobilebasic`
+   URL needs a signed-in browser; curl gets a login page.
    Always search the board for open cards on the same file (query below) and match their
    conventions (Epic, schedule, lookup rules).
 3. The card covers what the request says and what Daniel describes. Downstream consequences
@@ -54,6 +57,8 @@ Upload first, then link it from the card: `POST $B/attachments?fileName=<name>.p
 Search every card with one WIQL query: `[System.Title]`, `[System.Description]` and
 `[System.History]` (comments) each `CONTAINS` the request's keywords, in English and Spanish.
 List the open matches with state and assignee, and read their descriptions, before drafting.
+Dan's own replies in the task doc's communication log say whether the request is already on the
+board; read it before querying.
 
 ## Defaults
 

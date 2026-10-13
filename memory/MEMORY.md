@@ -15,3 +15,5 @@
 - [ADO spec references existing code](ado-spec-reference-existing-code.md) — card that mirrors a feature names the reference file and function in the other repo
 - [Lead with the verdict](lead-with-the-verdict.md) — investigation report opens with the verdict and whether Dan must act
 - [Explain designs before/after](explain-designs-before-after.md) — multi-part design: plain "today / after" story first, spec second
+- [Requester answer is final](requester-answer-is-final.md) — an answered card question becomes a rule on the card; no "to confirm" marker
+- [Credentials once per session](credentials-once-per-session.md) — cache a credential after one prompt; never let a script or sub-agent call 1Password repeatedly

@@ -1,6 +1,6 @@
 # Spec: broken-down Vintage invoices for QuickBooks
 
-Date: 2026-10-01. Status: agreed with Dan, not built. Nothing in any sheet or repo was changed to write this.
+Date: 2026-10-01, open points closed 2026-10-09. Status: complete, to be built by a developer from ADO cards. Nothing in any sheet or repo was changed to write this.
 
 ## Goal
 
@@ -86,7 +86,7 @@ The accountant selects one or more rows in `Vintage Invoice` and runs the menu i
 For each selected invoice:
 
 1. **Find the jobs.** Look up the invoice number in WIP Lavandería Invoice Link (6140), on `Shipped 2026` and `Open Production`. If any job is found, the Source is `Lavandería` and 9025 is not read. Otherwise look it up in 9025 Invoice # (7071), on `WIP`, `To Invoice` and `Ship`; Source is `9025`. **Lavandería wins when an invoice is in both.**
-2. **One line-item row per job.** A job is a distinct Job # + Split. The same 9025 job can appear on two tabs (seen on invoice 22749); keep one row for it.
+2. **One line-item row per job.** A job is a distinct Job # + Split; a blank Split counts as `01`. The same 9025 job can appear on two tabs (seen on invoice 22749); keep one row for it. **Job # is required.** A source row whose job number is blank (Lavandería VI Ref# 6059, or 9025 Job # 6249) stops the whole invoice: nothing is added, status 7624 says `Job # missing: <tab> row <n>`, and a dialog tells the accountant to fill it in the source file and run again. Decided by Dan 2026-10-09; the alternative, labelling such rows by graphic name, was rejected.
 3. **Fill the cost cells with dollar amounts**, rounded to cents. For every cost column whose row-1 ID exists in the source tab:
    - `Per unit`: source price × quantity.
    - `Per job`: source amount as it is.
@@ -116,7 +116,7 @@ Lines. Each non-zero cost cell becomes one Queue row, found by column ID:
 | Queue column | ID | Value |
 |---|---|---|
 | InvoiceNo | 7280 | invoice number, plain value. All rows of the invoice share it. |
-| Customer | 7281 | translated customer. For Lave, when AR (267) on `Vintage Invoice` is `Factor`, use `Tequila Blues Factored`. |
+| Customer | 7281 | translated customer. For Lave, when AR (7675, formerly 267) on `Vintage Invoice` is `Factor`, use `Tequila Blues Factored`. |
 | TxnDate | 7272 | Invoice Date (2535) |
 | DueDate | 7282 | blank. Terms are text such as "N20" and the importer accepts only a date; QuickBooks applies the customer's terms. |
 | Item | 7627 | row 3 (TB item) when the QuickBooks customer starts with "Tequila Blues" and row 3 is not blank; otherwise row 2 |
@@ -153,7 +153,7 @@ Put the logic that turns line-item rows plus header rows into Queue rows in a pu
 Manual acceptance on real data, read-only against the source files:
 
 - 22872 (Isaac Morris, one job, Lavandería).
-- 22875 (Isaac Morris, four job rows, two without VI Ref#).
+- 22875 (Isaac Morris, four rows on `Shipped 2026` rows 1095 to 1098, PO 53874; two have no VI Ref#). Expect `Job # missing` until those two get one; then four rows adding up to $3,126.60 from raw values.
 - 22882 (Lave, 9025 job 10866-A1).
 - 22743 (in both files; Lavandería must win, and the total check shows whether that fill matches $1,330.56).
 - 22876 (in neither file today; expect `Job not found`).
@@ -172,4 +172,4 @@ Then one end-to-end import using the importer's own test procedure (`qb_sync_too
 1. ~~Job # and Split in 7001 use one pair of columns (IDs 6249 and 6250) holding either file's job number, plus Source. The alternative is two pairs, one per source file.~~ **Decided 2026-10-03: one pair plus Source.** An invoice only comes from one file; two pairs would leave half the columns empty on every row.
 2. ~~WIP Lavandería's Unit Price formula (6136) sums a range that includes Polybag Qty (6191). Confirm which packing-supplies columns are real per-unit prices before creating them as cost columns.~~ **Decided 2026-10-09: the six columns listed in section 1.** Found on the way: the Unit Price formula differs by row (Shipped 2026 mostly `SUM(DL:DX)`, which excludes Set up and Dev Fee; Open Production mostly `SUM(DL:EB)+EF+SUM(EG:EL)`, which includes Polybag Qty, so 33 rows carry one dollar too much). The 7001 fill multiplies each column's own price by quantity and is unaffected; mismatches surface in the export's total check.
 3. ~~For invoice 22743 the 9025 rows add up to the invoice amount exactly. If the Lavandería fill does not, the "Lavandería wins" rule needs a second look for Lave jobs.~~ **Checked 2026-10-09: the Lavandería fill is $1,330.56 too** (one row, VP-3325, 1,232 units: Front print 0.60, Neck print 0.13, Packaging 0.35). Both files agree, so "Lavandería wins" stands.
-4. Some Lavandería job rows on invoices have no Split value, and some have no VI Ref# (two of the four rows on invoice 22875). The row is still added; the Description is then built from what is there.
+4. ~~Some Lavandería job rows on invoices have no Split value, and some have no VI Ref# (two of the four rows on invoice 22875). The row is still added; the Description is then built from what is there.~~ **Decided 2026-10-09: blank Split counts as `01`; blank Job # stops the invoice with a message (see step 1, point 2).**
