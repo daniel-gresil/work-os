@@ -43,3 +43,5 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-10-09 | ado-add-task | L2 | corrected — Dan pointed out the requester's answer already settled the 1X question; dropped the "to confirm" marker
 2026-11-01 | create-branch | (none stated) | clean
 2026-11-01 | wrap-up | (none stated) | clean
+2026-11-06 | monthly-invoice-draft | L1 | clean
+2026-11-06 | gmail-draft | L1 | clean

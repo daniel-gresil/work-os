@@ -32,3 +32,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-05 | lave | request-to-ado-card | read a task-app request, two sheets and one repo; settled the design in three rounds; card update and a second card pending the requester's open points
 2026-10-09 | lave | request-to-ado-card | checked the board for an existing card from a task-app link, found it, folded the requester's two answers into the card
 2026-11-01 | personal | personal-infra-build | deployed Actual Budget on the personal VPS, Hermes skill with bank sync via SimpleFIN, categorized two months, two cron jobs; decided to replace it with Firefly III
+2026-11-06 | lave | monthly-invoice | drafted the October invoice with 10 unworked weekdays subtracted; added --skip-weekdays to the skill
