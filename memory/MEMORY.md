@@ -17,3 +17,5 @@
 - [Explain designs before/after](explain-designs-before-after.md) — multi-part design: plain "today / after" story first, spec second
 - [Requester answer is final](requester-answer-is-final.md) — an answered card question becomes a rule on the card; no "to confirm" marker
 - [Credentials once per session](credentials-once-per-session.md) — cache a credential after one prompt; never let a script or sub-agent call 1Password repeatedly
+- [Mac Studio is the Hermes host](mac-studio-is-hermes-host.md) — install skills, env, cron jobs on the Studio; the MacBook Hermes is a remote client
+- [Can you do both means do it](can-you-do-both-means-do-it.md) — do the work via API/CLI/SSH; hand back only what needs his login
