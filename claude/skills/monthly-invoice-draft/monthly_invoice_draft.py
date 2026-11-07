@@ -42,13 +42,15 @@ class InvoicePeriod:
     subject: str
 
 
-def previous_month(today: date) -> InvoicePeriod:
+def previous_month(today: date, skip_weekdays: int = 0) -> InvoicePeriod:
     prior = today.replace(day=1) - timedelta(days=1)
     weekdays = sum(
         1
         for day in range(1, calendar.monthrange(prior.year, prior.month)[1] + 1)
         if date(prior.year, prior.month, day).weekday() < 5
-    )
+    ) - skip_weekdays
+    if weekdays <= 0:
+        raise SystemExit("skip_weekdays leaves no billable days")
     hours = weekdays * HOURS_PER_DAY
     month_name = calendar.month_name[prior.month]
     return InvoicePeriod(
@@ -212,9 +214,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["preview", "check", "create"])
     parser.add_argument("--today", help="override the local date as YYYY-MM-DD")
+    parser.add_argument("--skip-weekdays", type=int, default=0, help="weekdays not worked, subtracted from the count")
     args = parser.parse_args(argv)
     today = date.fromisoformat(args.today) if args.today else datetime.now(TZ).date()
-    period = previous_month(today)
+    period = previous_month(today, args.skip_weekdays)
     try:
         if args.command == "preview":
             output = {"status": "preview", "period": asdict(period), "write_performed": False}

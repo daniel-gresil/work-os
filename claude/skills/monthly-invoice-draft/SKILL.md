@@ -31,7 +31,7 @@ $R --script $S create     # one draft, read back and verified
 2. Run `create`. It is safe to rerun: an invoice already in Sent means no write, and an existing draft with the same subject is verified and reused instead of duplicated.
 3. Success is `status: ok`, every entry under `checks` true, `remittance_block_present` true, `DRAFT` in the labels and `SENT` not. Report the period, amount and `draft_id`.
 
-`--today YYYY-MM-DD` overrides the date, for a late invoice or a test.
+`--today YYYY-MM-DD` overrides the date, for a late invoice or a test. `--skip-weekdays N` subtracts N weekdays not worked (used for October 2026: 10 days).
 
 ## Rules
 
