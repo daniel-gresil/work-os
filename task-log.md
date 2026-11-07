@@ -33,3 +33,4 @@ YYYY-MM-DD | client | task type | what was done
 2026-10-09 | lave | request-to-ado-card | checked the board for an existing card from a task-app link, found it, folded the requester's two answers into the card
 2026-11-01 | personal | personal-infra-build | deployed Actual Budget on the personal VPS, Hermes skill with bank sync via SimpleFIN, categorized two months, two cron jobs; decided to replace it with Firefly III
 2026-11-06 | lave | monthly-invoice | drafted the October invoice with 10 unworked weekdays subtracted; added --skip-weekdays to the skill
+2026-11-07 | personal | personal-infra-remove | removed Actual Budget from the personal VPS, repo and both Hermes installs after the Firefly III switch; data tarball kept; also checked Firefly for an Amex fee date (not there yet)
