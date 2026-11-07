@@ -30,6 +30,9 @@ file-specific skill in the 9025_WIP repo.
 All access goes through `assign_column_ids.py` in this folder (stdlib only;
 OAuth via the cached creds in `lave-file-access-audit/.cf_creds.json`, or `op`).
 
+In work-os, `source ~/.cache/claude-secrets/work-os/env.sh` first; the tool reads the Sheets OAuth
+values from that cache. WIP Lavanderia & Print tabs have the header in row 5: pass `--header-row 5` to stamp.
+
 ## Steps
 
 1. **Read the target tab's header row** (row 2, or the frozen-row count) and

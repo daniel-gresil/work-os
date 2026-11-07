@@ -18,7 +18,7 @@ Usage:
       --dept Finance --file 7002 --notes "Invoice date sent to QBO" [--url URL]
   assign_column_ids.py stamp --sheet <id-or-url> --tab Invoices C=7272 F=7273
 """
-import argparse, json, re, subprocess, sys, time, urllib.parse, urllib.request
+import argparse, json, os, re, subprocess, sys, time, urllib.parse, urllib.request
 from pathlib import Path
 
 REG = '1KM8vJCuAIGoWP5nmIBnnXZPcsz4Qzn459aIyk1V4eCY'
@@ -35,6 +35,9 @@ _token = None
 
 
 def op_read(field):
+    env = {'client_id': 'SHEETS_CLIENT_ID', 'client_secret': 'SHEETS_CLIENT_SECRET', 'sheets_refresh_token': 'SHEETS_REFRESH_TOKEN'}
+    if os.environ.get(env.get(field, '')):  # work-os secrets cache (op is blocked there)
+        return os.environ[env[field]]
     if CRED_CACHE.exists():
         val = json.loads(CRED_CACHE.read_text()).get(field)
         if val:

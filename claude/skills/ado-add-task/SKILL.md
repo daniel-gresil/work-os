@@ -13,6 +13,9 @@ A card built from a customer request is created only after Daniel approves the d
 
 ## Cards from a customer request (task app link)
 
+A request that arrives by email is handled the same way; the description opens with the file link
+and "Requested by: name (role, company, email)".
+
 1. The task app link (`script.google.com/.../exec?task_id=<id>`) does not load in the automated
    browser. `<id>` is a Google Doc: read it at `https://docs.google.com/document/d/<id>/mobilebasic`.
 2. Look up what the request touches (sheets, repos) before drafting; don't ask Daniel what can be checked.
@@ -70,7 +73,7 @@ board; read it before querying.
 | Assignee | **Unassigned** unless named |
 | Effort | `Microsoft.VSTS.Scheduling.Effort` = **1** unless specified (days; 0.5 = half day) |
 | Iteration | `IT Dept` (backlog root — never a sprint; sprints are assigned deliberately later) |
-| Parent Epic | **Ask** which Epic (list them) — unless the user already named one. One question covers a whole batch. |
+| Parent Epic | An Epic groups the cards of one file. Find the Epic for the request's file (search Epic titles and the descriptions of its cards); create a new Epic only when the file has none, named after the file. Ask only when the file is unclear. |
 
 ## Roster (exact emails — do NOT guess patterns)
 
