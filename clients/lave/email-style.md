@@ -20,3 +20,4 @@ Read before drafting. Each lesson was learned by comparing a draft with what Dan
 - 2026-10-09 — Sign-off is "Thank you." then "Daniel" on its own line; the draft must include the name.
 - 2026-11-06 — Answer only what was asked. Do not open an adjacent topic or promise a follow-up check in the same reply.
 - 2026-11-06 — Portuguese replies close with "Qualquer dúvida me avisa." then "Daniel" on its own line, not "Obrigado."
+- 2026-11-07 — When a request becomes a card, the reply names the sprint it lands in, with its dates.

@@ -19,3 +19,4 @@
 - [Credentials once per session](credentials-once-per-session.md) — cache a credential after one prompt; never let a script or sub-agent call 1Password repeatedly
 - [Mac Studio is the Hermes host](mac-studio-is-hermes-host.md) — install skills, env, cron jobs on the Studio; the MacBook Hermes is a remote client
 - [Can you do both means do it](can-you-do-both-means-do-it.md) — do the work via API/CLI/SSH; hand back only what needs his login
+- [Prefer CLI for cloud admin](prefer-cli-for-cloud-admin.md) — Azure/GCP work via CLI or API first; install the CLI if missing
