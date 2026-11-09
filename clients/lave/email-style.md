@@ -21,3 +21,4 @@ Read before drafting. Each lesson was learned by comparing a draft with what Dan
 - 2026-11-06 — Answer only what was asked. Do not open an adjacent topic or promise a follow-up check in the same reply.
 - 2026-11-06 — Portuguese replies close with "Qualquer dúvida me avisa." then "Daniel" on its own line, not "Obrigado."
 - 2026-11-07 — When a request becomes a card, the reply names the sprint it lands in, with its dates.
+- 2026-11-08 — When the card is assigned, the assignee is on To and the reply addresses them directly (@Name), inviting them to ask the requester, instead of promising what the assignee will do.

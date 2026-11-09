@@ -36,3 +36,5 @@ YYYY-MM-DD | client | task type | what was done
 2026-11-07 | personal | personal-infra-remove | removed Actual Budget from the personal VPS, repo and both Hermes installs after the Firefly III switch; data tarball kept; also checked Firefly for an Amex fee date (not there yet)
 2026-11-07 | lave | request-to-ado-card | card for a WIP date column from an email request; two unregistered IDs filled and one new ID claimed in the registry; reply draft in the thread
 2026-11-07 | lave | vendor-billing-review | traced a missing Microsoft invoice to a separate Azure billing account and fixed the recipient; deleted an unused Azure test domain and VPN (~$470/mo); inventoried all Microsoft spend; scheduled seat reductions at renewal; reminders set for the Vintage billing split
+2026-11-08 | lave | request-to-ado-card | SPD Dashboard AR Ledger re-import traced to root cause; card under a new SPD Dashboard Epic; Sprint 9 created; reply draft in thread
+2026-11-08 | lave | request-to-ado-card | card from an email request for an image column: traced the tech pack path through Drive, found a duplicate column ID, new Epic, reply draft in thread

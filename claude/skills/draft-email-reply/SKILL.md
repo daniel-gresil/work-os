@@ -41,6 +41,9 @@ If the thread read shows a `DRAFT` message from Dan, he has started the reply hi
 
 ## Step 3 — Write and show
 
+Once Dan has said "draft the reply", create the draft in the same turn as you show the body. Put any
+open point (sprint, a fact to confirm) in the chat message, not as a blocker; he edits in Gmail.
+
 Write the reply as plain text and HTML files in the scratchpad. Show Dan the recipients and the body in chat, and wait for his go-ahead or edits. Dan often uses tables and screenshots to organise information; when the content is a list of items with attributes, or describes something visible on a screen, propose a table or ask him for a screenshot to place inline.
 
 ## Step 4 — Create the draft in the thread

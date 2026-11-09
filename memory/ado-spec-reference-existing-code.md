@@ -17,3 +17,5 @@ writing the spec for the ADO, so you can reference the function name in the 9025
 look at the 9025 function for reference if they want to."
 **How to apply:** while fact-finding for a card, note the file and function names of the pattern being
 copied and put them in the description under a "Reference" line. Related: [[analysis-before-changes]].
+
+When the reference lives in another repo, say on the card that the code is copied and that repo is not modified. Dan asked whether the 9149 image task was "related to 9025" because the card cited 9025 functions (2026-11-08).

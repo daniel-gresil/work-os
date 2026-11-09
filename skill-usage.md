@@ -52,3 +52,10 @@ YYYY-MM-DD | skill | level | clean  (or: corrected — what Dan changed)
 2026-11-07 | draft-email-reply | L1 | corrected — Dan cut the "still in use" line and the Vintage follow-up promise, changed the Portuguese sign-off
 2026-11-07 | gmail-draft | L1 | clean
 2026-11-07 | wrap-up | (none stated) | clean
+2026-11-08 | ado-add-task | L2 | corrected — Epic: Dan rejected Epic 351, a new per-file Epic was created instead
+2026-11-08 | draft-email-reply | L1 | clean
+2026-11-08 | gmail-draft | L1 | clean
+2026-11-08 | ado-add-task | L2 | corrected — Dan asked to make clear the other repo is reference only, not touched
+2026-11-08 | draft-email-reply | L1 | corrected — Dan expected the draft created when he said "draft it"; I waited on the sprint question
+2026-11-08 | gmail-draft | L1 | clean
+2026-11-08 | wrap-up | (none stated) | clean
